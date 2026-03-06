@@ -21,6 +21,34 @@ const solutions = [
   'For Founders'
 ];
 
+const revenueSubsystems = [
+  {
+    number: '01',
+    title: 'Lead Capture Systems',
+    description: 'Captures interested people through website forms, chatbots, and landing pages so no high-intent visitor is missed.'
+  },
+  {
+    number: '02',
+    title: 'Automated Follow-Ups',
+    description: 'Sends reminders, offers, and follow-up messages automatically when a customer does not buy immediately.'
+  },
+  {
+    number: '03',
+    title: 'Sales Funnels',
+    description: 'Guides customers through a step-by-step path from interest to purchase, from landing page to offer, payment, and confirmation.'
+  },
+  {
+    number: '04',
+    title: 'CRM Integration',
+    description: 'Keeps customers, conversations, purchases, and follow-ups organized automatically in one connected system.'
+  },
+  {
+    number: '05',
+    title: 'Payment Automation',
+    description: 'Lets customers pay automatically through cards, mobile payments, and subscriptions without manual coordination.'
+  }
+];
+
 const businessTypes = ['Car dealership', 'Restaurant', 'Online store', 'Real estate', 'Service business'];
 const otherOptionValue = '__other__';
 const experienceDraftStorageKey = 'expultExperienceDraftId';
@@ -776,7 +804,7 @@ const renderApp = () => {
       <main id="home" class="hero-section" style="--hero-image: url('${heroImageUrl}')">
         <div class="hero-background-overlay"></div>
         <div class="container hero-content">
-          <div class="row align-items-center">
+          <div class="row align-items-end hero-row">
             <div class="col-lg-7 col-xl-6">
               <div class="hero-copy">
                 <span class="hero-eyebrow">Revenue Automation Systems</span>
@@ -792,9 +820,25 @@ const renderApp = () => {
                 </div>
               </div>
             </div>
+
+            <div class="col-lg d-flex justify-content-end mt-4 mt-lg-0">
+              <div class="hero-scroll-action">
+                <span class="hero-scroll-hint">Click me</span>
+                <button
+                  class="hero-scroll-button"
+                  type="button"
+                  data-scroll-target="#revenue-subsystems"
+                  aria-label="Scroll to the Revenue Automation Systems subsystem section"
+                >
+                  <span aria-hidden="true">↓</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </main>
+
+      ${renderRevenueSubsystemSection()}
     </div>
 
     <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
@@ -894,6 +938,92 @@ const renderApp = () => {
       aria-hidden="true"
     ></button>
   `;
+};
+
+const renderRevenueSubsystemSection = () => {
+  return `
+    <section class="subsystems-section" id="revenue-subsystems" aria-labelledby="revenueSubsystemsTitle">
+      <div class="container">
+        <div class="section-heading section-heading-centered">
+          <span class="hero-eyebrow">What Expult Tech Actually Builds</span>
+          <h2 id="revenueSubsystemsTitle">Sub Systems under Revenue Automation Systems</h2>
+          <p class="subsystems-copy">
+            A combination of these subsystems helps businesses convert website visitors into customers, increase revenue with less manual work, and strengthen overall revenue streams.
+          </p>
+        </div>
+
+        <div class="subsystems-flow" aria-label="Revenue automation subsystem overview">
+          ${revenueSubsystems
+            .map(
+              ({ number, title, description }, index) => `
+                <article
+                  class="subsystem-step ${index === 0 ? 'active' : 'inactive'}"
+                >
+                  <button
+                    class="subsystem-node"
+                    type="button"
+                    data-subsystem-index="${index}"
+                    aria-pressed="${index === 0 ? 'true' : 'false'}"
+                    aria-label="Focus ${escapeHtml(title)}"
+                  >
+                    <span class="subsystem-copy-block">
+                      <h3>${escapeHtml(title)}</h3>
+                      <p>${escapeHtml(description)}</p>
+                    </span>
+
+                    <span class="subsystem-divider" aria-hidden="true"></span>
+
+                    <span class="subsystem-circle" aria-hidden="true">
+                      <span>${number}</span>
+                    </span>
+                  </button>
+                </article>
+              `
+            )
+            .join('')}
+        </div>
+      </div>
+    </section>
+  `;
+};
+
+const initializeRevenueSubsystemSection = () => {
+  const heroScrollTrigger = document.querySelector('[data-scroll-target]');
+  const heroScrollTargetSelector = heroScrollTrigger?.getAttribute('data-scroll-target');
+  const heroScrollTarget = heroScrollTargetSelector ? document.querySelector(heroScrollTargetSelector) : null;
+  const triggers = [...document.querySelectorAll('[data-subsystem-index]')];
+  const steps = [...document.querySelectorAll('.subsystem-step')];
+
+  if (heroScrollTrigger && heroScrollTarget) {
+    heroScrollTrigger.addEventListener('click', () => {
+      heroScrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
+  if (!triggers.length || !steps.length) {
+    return;
+  }
+
+  const setActiveSubsystem = (index) => {
+    const safeIndex = revenueSubsystems[index] ? index : 0;
+
+    steps.forEach((step, stepIndex) => {
+      const isActive = stepIndex === safeIndex;
+      const trigger = step.querySelector('[data-subsystem-index]');
+
+      step.classList.toggle('active', isActive);
+      step.classList.toggle('inactive', !isActive);
+      trigger?.setAttribute('aria-pressed', String(isActive));
+    });
+  };
+
+  triggers.forEach((trigger) => {
+    const subsystemIndex = Number(trigger.getAttribute('data-subsystem-index'));
+
+    trigger.addEventListener('click', () => {
+      setActiveSubsystem(subsystemIndex);
+    });
+  });
 };
 
 const initializeContactForm = () => {
@@ -1612,5 +1742,6 @@ const initializeExperienceModal = () => {
 };
 
 renderApp();
+initializeRevenueSubsystemSection();
 initializeContactForm();
 initializeExperienceModal();
