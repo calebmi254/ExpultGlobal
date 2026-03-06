@@ -49,6 +49,103 @@ const revenueSubsystems = [
   }
 ];
 
+const serviceCardIcons = {
+  support:
+    '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4.5a7.5 7.5 0 0 0-7.5 7.5v2.75A2.75 2.75 0 0 0 7.25 17.5H8.5v-6H7.25A2.74 2.74 0 0 0 5 12c0-3.87 3.13-7 7-7s7 3.13 7 7a2.74 2.74 0 0 0-2.25-.5H15.5v6h1.25c1.52 0 2.75-1.23 2.75-2.75V12A7.5 7.5 0 0 0 12 4.5Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.5 19.25h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M14.5 19.25A1.75 1.75 0 0 1 12.75 21h-1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  automation:
+    '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 4.75 6.75 10H11l-1 4.5L17.25 8H13l1-3.25H10Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 18.5h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+  web:
+    '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2.5" stroke="currentColor" stroke-width="1.6"/><path d="M4 9.25h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M8 13h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M8 16h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+  data:
+    '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 17.5V10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 17.5V6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M18 17.5v-4.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M4.75 18.5h14.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+  custom:
+    '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 6 3-2 3 2 3.5.5.5 3.5 2 3-2 3-.5 3.5-3.5.5-3 2-3-2-3.5-.5-.5-3.5-2-3 2-3 .5-3.5L9 6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m9.75 12 1.5 1.5 3-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  cta:
+    '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7.5h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M5 12h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M5 16.5h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="m15 14 4 4m0-4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  feature:
+    '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m7.5 12 3 3 6-6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  value:
+    '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5.25 13.97 9.24l4.4.64-3.18 3.1.75 4.38L12 15.3l-3.94 2.07.75-4.38-3.18-3.1 4.4-.64L12 5.25Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>'
+};
+
+const otherServices = [
+  {
+    number: '01',
+    tone: 'support',
+    icon: serviceCardIcons.support,
+    category: 'AI systems',
+    title: 'AI-Powered Customer Support',
+    description:
+      'Expult Global deploys AI-driven customer support systems that respond instantly, automate common conversations, and guide visitors toward inquiries or bookings.',
+    itemLabel: 'Includes',
+    items: ['AI website chat assistants', 'Automated customer responses', 'Smart FAQ systems', 'Lead qualification bots'],
+    businessValue:
+      'Reduces support workload while ensuring customers always receive immediate responses, improving customer experience and increasing conversion rates.'
+  },
+  {
+    number: '02',
+    tone: 'automation',
+    icon: serviceCardIcons.automation,
+    category: 'Automation',
+    title: 'Business Process Automation',
+    description:
+      'Expult Global designs automation systems that eliminate repetitive manual tasks so routine operational workflows can run more efficiently in the background.',
+    itemLabel: 'Examples',
+    items: ['Appointment booking systems', 'Invoice and payment automation', 'Document processing workflows', 'CRM workflow automation'],
+    businessValue: 'Reduces operational delays, improves efficiency, and saves time by automating routine business processes.'
+  },
+  {
+    number: '03',
+    tone: 'web',
+    icon: serviceCardIcons.web,
+    category: 'Web conversion',
+    title: 'High-Converting Websites',
+    description:
+      'Expult Global builds modern websites designed to do more than present a business online. They are built to convert visitors into leads and customers.',
+    itemLabel: 'Includes',
+    items: ['Landing pages', 'Sales funnels', 'Fast and optimized web design', 'Mobile-friendly platforms'],
+    businessValue: 'Transforms websites into active revenue channels that capture leads and support customer acquisition.'
+  },
+  {
+    number: '04',
+    tone: 'data',
+    icon: serviceCardIcons.data,
+    category: 'Insights',
+    title: 'Data & Intelligence Systems',
+    description:
+      'Expult Global builds data systems that collect, organize, and visualize key business data so teams can monitor performance and make informed decisions.',
+    itemLabel: 'Examples',
+    items: ['Business dashboards', 'Customer analytics', 'Revenue tracking systems', 'Data integrations'],
+    businessValue:
+      'Provides businesses with clear insights into their performance and enables data-driven decision making.'
+  },
+  {
+    number: '05',
+    tone: 'custom',
+    icon: serviceCardIcons.custom,
+    category: 'Custom build',
+    title: 'Custom Software Development',
+    description:
+      'Expult Global develops tailored digital solutions for businesses that need tools beyond standard platforms, built around real workflows and operations.',
+    itemLabel: 'Examples',
+    items: ['Custom platforms', 'Internal business systems', 'SaaS applications', 'API integrations'],
+    businessValue:
+      'Gives businesses technology tailored to their operations, improving efficiency and supporting long-term scalability.'
+  },
+  {
+    number: '06',
+    tone: 'cta',
+    icon: serviceCardIcons.cta,
+    category: 'Custom services',
+    title: 'Freely Contact Us for Custom Services',
+    description:
+      'If your business needs something more specialized, Expult Global can design a custom service around your exact workflow, operations, and growth direction.',
+    items: ['Specialized workflows', 'Internal tools', 'New digital products', 'Custom integrations'],
+    ctaNote: 'Tell us what you want built and we will shape the right next step with you.',
+    ctaLabel: 'Freely Contact Us'
+  }
+];
+
 const businessTypes = ['Car dealership', 'Restaurant', 'Online store', 'Real estate', 'Service business'];
 const otherOptionValue = '__other__';
 const experienceDraftStorageKey = 'expultExperienceDraftId';
@@ -839,6 +936,7 @@ const renderApp = () => {
       </main>
 
       ${renderRevenueSubsystemSection()}
+      ${renderOtherServicesSection()}
     </div>
 
     <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
@@ -980,6 +1078,129 @@ const renderRevenueSubsystemSection = () => {
                 </article>
               `
             )
+            .join('')}
+        </div>
+      </div>
+    </section>
+  `;
+};
+
+const renderOtherServicesSection = () => {
+  return `
+    <section class="services-section" id="other-services" aria-labelledby="otherServicesTitle">
+      <div class="container services-layout">
+        <div class="section-heading section-heading-centered services-heading">
+          <span class="hero-eyebrow">Beyond Revenue Automation Systems</span>
+          <h2 id="otherServicesTitle">Other Services offered:</h2>
+          <p class="subsystems-copy services-copy">
+            Expult Global also builds smart support, automation, web, data, and custom delivery systems that help businesses operate faster and grow with less friction.
+          </p>
+        </div>
+
+        <div class="services-grid" aria-label="Other services offered by Expult Global">
+          ${otherServices
+            .map((service) => {
+              if (service.ctaLabel) {
+                return `
+                  <article class="service-card service-card-${service.tone} service-card-cta">
+                    <span class="service-card-shell" aria-hidden="true"></span>
+
+                    <div class="service-card-head">
+                      <span class="service-card-icon-badge">
+                        <span class="service-card-icon">${service.icon}</span>
+                        <span class="service-card-number">${service.number}</span>
+                      </span>
+
+                      <div class="service-card-head-copy">
+                        <span class="service-card-category">${escapeHtml(service.category)}</span>
+                        <h3>${escapeHtml(service.title)}</h3>
+                      </div>
+                    </div>
+
+                    <p class="service-card-description">${escapeHtml(service.description)}</p>
+
+                    <div class="service-card-stack">
+                      <div class="service-card-stack-head">
+                        <span class="service-card-label">Perfect for</span>
+                      </div>
+
+                      <ul class="service-feature-list service-feature-list-cta" aria-label="${escapeHtml(service.title)} use cases">
+                        ${service.items
+                          .map(
+                            (item) => `
+                              <li class="service-feature-item">
+                                <span class="service-feature-icon">${serviceCardIcons.feature}</span>
+                                <span>${escapeHtml(item)}</span>
+                              </li>
+                            `
+                          )
+                          .join('')}
+                      </ul>
+                    </div>
+
+                    <div class="service-card-footer">
+                      <p class="service-card-cta-note">${escapeHtml(service.ctaNote)}</p>
+                      <button
+                        class="btn btn-primary-glow service-card-action"
+                        type="button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#contactModal"
+                        data-team-type="General Inquiry"
+                      >
+                        ${escapeHtml(service.ctaLabel)}
+                      </button>
+                    </div>
+                  </article>
+                `;
+              }
+
+              return `
+                <article class="service-card service-card-${service.tone}">
+                  <span class="service-card-shell" aria-hidden="true"></span>
+
+                  <div class="service-card-head">
+                    <span class="service-card-icon-badge">
+                      <span class="service-card-icon">${service.icon}</span>
+                      <span class="service-card-number">${service.number}</span>
+                    </span>
+
+                    <div class="service-card-head-copy">
+                      <span class="service-card-category">${escapeHtml(service.category)}</span>
+                      <h3>${escapeHtml(service.title)}</h3>
+                    </div>
+                  </div>
+
+                  <p class="service-card-description">${escapeHtml(service.description)}</p>
+
+                  <div class="service-card-stack">
+                    <div class="service-card-stack-head">
+                      <span class="service-card-label">${escapeHtml(service.itemLabel)}</span>
+                    </div>
+
+                    <ul class="service-feature-list" aria-label="${escapeHtml(service.title)} ${escapeHtml(service.itemLabel).toLowerCase()}">
+                      ${service.items
+                        .map(
+                          (item) => `
+                            <li class="service-feature-item">
+                              <span class="service-feature-icon">${serviceCardIcons.feature}</span>
+                              <span>${escapeHtml(item)}</span>
+                            </li>
+                          `
+                        )
+                        .join('')}
+                    </ul>
+                  </div>
+
+                  <div class="service-card-value">
+                    <span class="service-card-value-icon">${serviceCardIcons.value}</span>
+                    <div class="service-card-value-copy">
+                      <span class="service-card-label">Business Value</span>
+                      <p>${escapeHtml(service.businessValue)}</p>
+                    </div>
+                  </div>
+                </article>
+              `;
+            })
             .join('')}
         </div>
       </div>
