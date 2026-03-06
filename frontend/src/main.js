@@ -24,6 +24,8 @@ const solutions = [
 const businessTypes = ['Car dealership', 'Restaurant', 'Online store', 'Real estate', 'Service business'];
 const otherOptionValue = '__other__';
 const experienceDraftStorageKey = 'expultExperienceDraftId';
+const appointmentRequestSuccessMessage =
+  'Appointment request has been triggered and one of our support team members will reach back shortly.';
 
 const priorityOptions = [
   {
@@ -46,7 +48,7 @@ const priorityOptions = [
 
 const priorityLabels = priorityOptions.map(({ label }) => label);
 
-const experienceWizardSteps = ['Your details', 'Business type', 'Growth priority', 'Blueprint'];
+const experienceWizardSteps = ['Your details', 'Business type', 'Growth priorities', 'Blueprint'];
 
 let pendingContactPrefill = null;
 
@@ -58,9 +60,19 @@ const createInitialExperienceState = () => ({
   businessName: '',
   businessTypeSelection: '',
   businessTypeCustom: '',
-  prioritySelection: '',
+  prioritySelections: [],
   priorityCustom: '',
   blueprint: null,
+  demoCountdownSeconds: 30,
+  demoFlowComplete: false,
+  returningFromFollowup: false,
+  followupVisible: false,
+  scheduleCallVisible: false,
+  reconfirmedEmailInput: '',
+  isRequestingAppointment: false,
+  appointmentRequested: false,
+  appointmentRequestMessage: '',
+  appointmentRequestError: '',
   errorMessage: '',
   isSubmitting: false,
   isSavingDraft: false,
@@ -96,21 +108,48 @@ const getSelectedBusinessType = () =>
     ? experienceState.businessTypeCustom.trim()
     : experienceState.businessTypeSelection;
 
-const getSelectedPriority = () =>
-  experienceState.prioritySelection === otherOptionValue
-    ? experienceState.priorityCustom.trim()
-    : experienceState.prioritySelection;
+const getDraftPriorities = (draft = {}) => {
+  if (Array.isArray(draft.priorities) && draft.priorities.length) {
+    return draft.priorities.map((priority) => String(priority || '').trim()).filter(Boolean);
+  }
+
+  if (typeof draft.priority === 'string' && draft.priority.trim()) {
+    return draft.priority
+      .split(',')
+      .map((priority) => priority.trim())
+      .filter(Boolean);
+  }
+
+  return [];
+};
+
+const getSelectedPriorities = () => {
+  const selectedValues = Array.isArray(experienceState.prioritySelections)
+    ? experienceState.prioritySelections
+    : [];
+  const priorities = selectedValues.filter((value) => value && value !== otherOptionValue);
+  const customPriority = experienceState.priorityCustom.trim();
+
+  if (selectedValues.includes(otherOptionValue) && customPriority) {
+    priorities.push(customPriority);
+  }
+
+  return Array.from(new Set(priorities));
+};
+
+const getPrioritySummary = () => getSelectedPriorities().join(', ');
 
 const isUsingCustomBusinessType = () => experienceState.businessTypeSelection === otherOptionValue;
 
-const isUsingCustomPriority = () => experienceState.prioritySelection === otherOptionValue;
+const isUsingCustomPriority = () =>
+  Array.isArray(experienceState.prioritySelections) && experienceState.prioritySelections.includes(otherOptionValue);
 
 const getStepFromDraft = (draft) => {
   if (draft.blueprint) {
     return 4;
   }
 
-  if (draft.priority) {
+  if (getDraftPriorities(draft).length) {
     return 3;
   }
 
@@ -127,9 +166,11 @@ const getStepFromDraft = (draft) => {
 
 const hydrateExperienceStateFromDraft = (draft) => {
   const businessType = draft.businessType || '';
-  const priority = draft.priority || '';
+  const priorities = getDraftPriorities(draft);
   const hasPresetBusinessType = businessTypes.includes(businessType);
-  const hasPresetPriority = priorityLabels.includes(priority);
+  const presetPriorities = priorities.filter((priority) => priorityLabels.includes(priority));
+  const customPriorities = priorities.filter((priority) => !priorityLabels.includes(priority));
+  const customPriority = customPriorities.join(', ');
 
   return {
     ...createInitialExperienceState(),
@@ -139,9 +180,19 @@ const hydrateExperienceStateFromDraft = (draft) => {
     businessName: draft.businessName || '',
     businessTypeSelection: hasPresetBusinessType ? businessType : businessType ? otherOptionValue : '',
     businessTypeCustom: hasPresetBusinessType ? '' : businessType,
-    prioritySelection: hasPresetPriority ? priority : priority ? otherOptionValue : '',
-    priorityCustom: hasPresetPriority ? '' : priority,
+    prioritySelections: [...presetPriorities, ...(customPriority ? [otherOptionValue] : [])],
+    priorityCustom: customPriority,
     blueprint: draft.blueprint || null,
+    demoCountdownSeconds: 30,
+    demoFlowComplete: Boolean(draft.blueprint),
+    returningFromFollowup: false,
+    followupVisible: false,
+    scheduleCallVisible: Boolean(draft.hotLead),
+    reconfirmedEmailInput: draft.reenteredEmail || draft.reconfirmedEmail || draft.confirmedContactEmail || '',
+    isRequestingAppointment: false,
+    appointmentRequested: Boolean(draft.hotLead),
+    appointmentRequestMessage: draft.hotLead ? appointmentRequestSuccessMessage : '',
+    appointmentRequestError: '',
     errorMessage: '',
     isSubmitting: false,
     isSavingDraft: false,
@@ -266,7 +317,7 @@ const renderProgressSteps = () => {
 const renderSelectionChips = () => {
   const chips = [];
   const selectedBusinessType = getSelectedBusinessType();
-  const selectedPriority = getSelectedPriority();
+  const selectedPriorities = getSelectedPriorities();
 
   if (experienceState.businessName) {
     chips.push(`<span class="selection-chip">${escapeHtml(experienceState.businessName)}</span>`);
@@ -276,9 +327,9 @@ const renderSelectionChips = () => {
     chips.push(`<span class="selection-chip">${escapeHtml(selectedBusinessType)}</span>`);
   }
 
-  if (selectedPriority) {
-    chips.push(`<span class="selection-chip">${escapeHtml(selectedPriority)}</span>`);
-  }
+  selectedPriorities.forEach((priority) => {
+    chips.push(`<span class="selection-chip">${escapeHtml(priority)}</span>`);
+  });
 
   return chips.length ? `<div class="selection-chip-row">${chips.join('')}</div>` : '';
 };
@@ -289,6 +340,80 @@ const renderExperienceActions = ({ left = '', right = '' } = {}) => `
     <div class="experience-actions-side experience-actions-side-right">${right}</div>
   </div>
 `;
+
+const renderExperienceFollowup = () => {
+  const followupHost = document.querySelector('#experienceFollowupHost');
+
+  if (!followupHost) {
+    return;
+  }
+
+  if (!experienceState.followupVisible || !experienceState.blueprint) {
+    followupHost.innerHTML = '';
+    return;
+  }
+
+  const showCompletionOnly = experienceState.appointmentRequested;
+
+  followupHost.innerHTML = `
+    <div class="experience-followup-panel" role="status">
+      <div class="experience-followup-copy">
+        <span class="experience-kicker">Demo complete</span>
+        <h3>You just experienced a demo revenue automation workflow for Expult.</h3>
+        <p>
+          The system moved you from a visitor to a potential customer inside a guided automation journey built to demonstrate how Expult captures, qualifies, and advances demand.
+        </p>
+      </div>
+
+      <div class="experience-followup-actions">
+        ${
+          showCompletionOnly
+            ? '<button class="btn btn-primary-glow" type="button" data-followup-action="complete-followup">Complete</button>'
+            : `
+                <button class="btn btn-ghost" type="button" data-followup-action="reopen-blueprint">Back to your blueprint</button>
+                <button class="btn btn-primary-glow" type="button" data-followup-action="toggle-schedule">Schedule a call with us</button>
+              `
+        }
+      </div>
+
+      ${
+        experienceState.scheduleCallVisible && !showCompletionOnly
+          ? `
+            <form class="experience-followup-form" id="experienceFollowupForm" novalidate>
+              <label class="form-label" for="experienceReconfirmedEmail">Re-enter your email</label>
+              <div class="experience-followup-input-row">
+                <input
+                  class="form-control"
+                  id="experienceReconfirmedEmail"
+                  name="email"
+                  type="email"
+                  value="${escapeHtml(experienceState.reconfirmedEmailInput)}"
+                  placeholder="re-enter your email"
+                  ${experienceState.isRequestingAppointment ? 'disabled' : ''}
+                  required
+                />
+                <button class="btn btn-primary-glow" type="submit" ${experienceState.isRequestingAppointment ? 'disabled' : ''}>
+                  ${experienceState.isRequestingAppointment ? 'Confirming...' : 'Confirm appointment request'}
+                </button>
+              </div>
+            </form>
+          `
+          : ''
+      }
+
+      ${
+        showCompletionOnly && experienceState.appointmentRequestMessage
+          ? `<div class="alert alert-success mb-0">${escapeHtml(experienceState.appointmentRequestMessage)}</div>`
+          : ''
+      }
+      ${
+        experienceState.appointmentRequestError
+          ? `<div class="alert alert-warning mb-0">${escapeHtml(experienceState.appointmentRequestError)}</div>`
+          : ''
+      }
+    </div>
+  `;
+};
 
 const renderInlineOtherOption = ({
   selected,
@@ -454,14 +579,14 @@ const renderExperienceWizard = () => {
         ${renderSelectionChips()}
         <div class="experience-stage-hero compact">
           <h3>What matters most right now?</h3>
-          <p>Choose the revenue or operational priority Expult should emphasize in your automation blueprint.</p>
+          <p>Choose one or more revenue or operational priorities Expult should emphasize in your automation blueprint.</p>
         </div>
         <div class="choice-grid priority-grid">
           ${priorityOptions
             .map(
               (priority) => `
                 <button
-                  class="choice-card choice-card-detail choice-card-compact ${experienceState.prioritySelection === priority.label ? 'selected' : ''}"
+                  class="choice-card choice-card-detail choice-card-compact ${getSelectedPriorities().includes(priority.label) ? 'selected' : ''}"
                   type="button"
                   data-priority="${escapeHtml(priority.label)}"
                 >
@@ -485,7 +610,7 @@ const renderExperienceWizard = () => {
         ${renderExperienceActions({
           left: '<button class="btn btn-ghost" type="button" data-step-action="back-to-business">Back</button>',
           right: `<button class="btn btn-primary-glow" type="button" data-step-action="generate-blueprint" ${
-            getSelectedPriority() || experienceState.isSubmitting ? '' : 'disabled'
+            getSelectedPriorities().length || experienceState.isSubmitting ? '' : 'disabled'
           }>${experienceState.isSubmitting ? 'Generating...' : 'Generate My Blueprint'}</button>`
         })}
       </section>
@@ -538,8 +663,8 @@ const renderExperienceWizard = () => {
           <strong>${escapeHtml(getSelectedBusinessType())}</strong>
         </article>
         <article class="result-overview-card">
-          <span class="result-overview-label">Growth priority</span>
-          <strong>${escapeHtml(getSelectedPriority())}</strong>
+          <span class="result-overview-label">Growth priorities</span>
+          <strong>${escapeHtml(getPrioritySummary())}</strong>
         </article>
       </div>
 
@@ -572,17 +697,23 @@ const renderExperienceWizard = () => {
 
       ${renderExperienceActions({
         left: '<button class="btn btn-ghost" type="button" data-step-action="restart-test-drive">Run It Again</button>',
-        right: `
-          <button
-            class="btn btn-primary-glow"
-            type="button"
-            data-open-contact="true"
-            data-bs-target="#contactModal"
-            data-bs-toggle="modal"
-          >
-            ${escapeHtml(blueprint.ctaLabel)}
-          </button>
-        `
+        right: experienceState.returningFromFollowup
+          ? '<button class="btn btn-primary-glow" type="button" data-step-action="finish-demo">Finish</button>'
+          : `
+              <button class="demo-complete-card demo-complete-card-button" type="button" data-step-action="open-followup-now" aria-live="polite">
+                <span class="result-overview-label">Demo Complete</span>
+                <strong>${
+                  experienceState.demoFlowComplete
+                    ? 'Workflow complete'
+                    : `Closing in ${experienceState.demoCountdownSeconds}s`
+                }</strong>
+                <p>${
+                  experienceState.demoFlowComplete
+                    ? 'Click to return to your follow-up action panel.'
+                    : 'Wait 30 seconds or click now to continue to your next action.'
+                }</p>
+              </button>
+            `
       })}
     </section>
   `;
@@ -751,6 +882,17 @@ const renderApp = () => {
         </div>
       </div>
     </div>
+
+    <div id="experienceFollowupHost" class="experience-followup-host" aria-live="polite"></div>
+    <button
+      class="d-none"
+      id="experienceModalReopenTrigger"
+      type="button"
+      data-bs-toggle="modal"
+      data-bs-target="#experienceModal"
+      tabindex="-1"
+      aria-hidden="true"
+    ></button>
   `;
 };
 
@@ -872,14 +1014,15 @@ const initializeContactForm = () => {
 const initializeExperienceModal = () => {
   const experienceWizard = document.querySelector('#experienceWizard');
   const experienceModal = document.querySelector('#experienceModal');
+  const followupHost = document.querySelector('#experienceFollowupHost');
+  const reopenTrigger = document.querySelector('#experienceModalReopenTrigger');
+  let experienceCountdownTimer = null;
 
-  if (!experienceWizard || !experienceModal) {
+  if (!experienceWizard || !experienceModal || !followupHost || !reopenTrigger) {
     return;
   }
 
-  renderExperienceWizard();
-
-  const syncExperienceActionState = () => {
+  function syncExperienceActionState() {
     const nextToPriorityButton = experienceWizard.querySelector('[data-step-action="next-to-priority"]');
     const generateBlueprintButton = experienceWizard.querySelector('[data-step-action="generate-blueprint"]');
 
@@ -888,9 +1031,79 @@ const initializeExperienceModal = () => {
     }
 
     if (generateBlueprintButton) {
-      generateBlueprintButton.disabled = !getSelectedPriority() || experienceState.isSubmitting;
+      generateBlueprintButton.disabled = !getSelectedPriorities().length || experienceState.isSubmitting;
     }
-  };
+  }
+
+  function stopDemoCountdown() {
+    if (experienceCountdownTimer) {
+      window.clearInterval(experienceCountdownTimer);
+      experienceCountdownTimer = null;
+    }
+  }
+
+  function dismissExperienceModal() {
+    const dismissTrigger = experienceModal.querySelector('[data-bs-dismiss="modal"]');
+    dismissTrigger?.click();
+  }
+
+  function resetExperienceDemo() {
+    clearStoredExperienceDraftId();
+    stopDemoCountdown();
+    experienceState = createInitialExperienceState();
+    refreshExperienceUI();
+  }
+
+  function refreshExperienceUI() {
+    renderExperienceWizard();
+    renderExperienceFollowup();
+    syncExperienceActionState();
+    syncDemoCountdown();
+  }
+
+  function completeDemoFlow() {
+    stopDemoCountdown();
+
+    if (!experienceState.blueprint) {
+      return;
+    }
+
+    experienceState = {
+      ...experienceState,
+      demoCountdownSeconds: 0,
+      demoFlowComplete: true,
+      followupVisible: true
+    };
+    refreshExperienceUI();
+
+    dismissExperienceModal();
+  }
+
+  function syncDemoCountdown() {
+    if (!(experienceState.step === 4 && experienceState.blueprint && !experienceState.isSubmitting && !experienceState.demoFlowComplete)) {
+      stopDemoCountdown();
+      return;
+    }
+
+    if (experienceCountdownTimer) {
+      return;
+    }
+
+    experienceCountdownTimer = window.setInterval(() => {
+      if (experienceState.demoCountdownSeconds <= 1) {
+        completeDemoFlow();
+        return;
+      }
+
+      experienceState = {
+        ...experienceState,
+        demoCountdownSeconds: experienceState.demoCountdownSeconds - 1
+      };
+      refreshExperienceUI();
+    }, 1000);
+  }
+
+  refreshExperienceUI();
 
   const focusWizardInput = (selector) => {
     window.requestAnimationFrame(() => {
@@ -931,7 +1144,7 @@ const initializeExperienceModal = () => {
 
     if (
       storedDraftId === experienceState.draftId &&
-      (experienceState.name || experienceState.blueprint || getSelectedBusinessType() || getSelectedPriority())
+      (experienceState.name || experienceState.blueprint || getSelectedBusinessType() || getSelectedPriorities().length)
     ) {
       return;
     }
@@ -941,37 +1154,39 @@ const initializeExperienceModal = () => {
       draftId: storedDraftId,
       isRestoringDraft: true
     };
-    renderExperienceWizard();
+    refreshExperienceUI();
 
     try {
       const savedDraft = await fetchExperienceDraft(storedDraftId);
       experienceState = hydrateExperienceStateFromDraft(savedDraft);
-      renderExperienceWizard();
+      refreshExperienceUI();
     } catch (error) {
       clearStoredExperienceDraftId();
       experienceState = {
         ...createInitialExperienceState(),
         errorMessage: error.message || 'We could not restore your saved draft right now.'
       };
-      renderExperienceWizard();
+      refreshExperienceUI();
     }
   };
 
   const submitExperienceBlueprint = async () => {
     const businessType = getSelectedBusinessType();
-    const priority = getSelectedPriority();
+    const priorities = getSelectedPriorities();
+    const priority = priorities.join(', ');
     const payload = {
       draftId: experienceState.draftId,
       businessType,
+      priorities,
       priority,
       name: experienceState.name,
       email: experienceState.email,
       businessName: experienceState.businessName
     };
 
-    if (!payload.name || !payload.email || !payload.businessName || !payload.businessType || !payload.priority) {
+    if (!payload.name || !payload.email || !payload.businessName || !payload.businessType || !payload.priorities.length) {
       experienceState.errorMessage = 'Please complete each step before generating your blueprint.';
-      renderExperienceWizard();
+      refreshExperienceUI();
       return;
     }
 
@@ -982,13 +1197,13 @@ const initializeExperienceModal = () => {
       blueprint: null,
       step: 4
     };
-    renderExperienceWizard();
+    refreshExperienceUI();
 
     try {
       await persistDraftProgress(
         {
           businessType,
-          priority
+          priorities
         },
         { silent: true }
       );
@@ -1011,10 +1226,20 @@ const initializeExperienceModal = () => {
         ...experienceState,
         draftId: data.draftId || experienceState.draftId,
         blueprint: data.blueprint,
+        demoCountdownSeconds: 30,
+        demoFlowComplete: false,
+        returningFromFollowup: false,
+        followupVisible: false,
+        scheduleCallVisible: false,
+        reconfirmedEmailInput: '',
+        isRequestingAppointment: false,
+        appointmentRequested: false,
+        appointmentRequestMessage: '',
+        appointmentRequestError: '',
         isSubmitting: false,
         step: 4
       };
-      renderExperienceWizard();
+      refreshExperienceUI();
     } catch (error) {
       experienceState = {
         ...experienceState,
@@ -1022,7 +1247,7 @@ const initializeExperienceModal = () => {
         step: 3,
         errorMessage: error.message || 'Backend is not reachable yet. Start npm run dev from the root folder.'
       };
-      renderExperienceWizard();
+      refreshExperienceUI();
     }
   };
 
@@ -1030,18 +1255,6 @@ const initializeExperienceModal = () => {
     const actionTrigger = event.target.closest('[data-step-action]');
     const businessTrigger = event.target.closest('[data-business-type]');
     const priorityTrigger = event.target.closest('[data-priority]');
-    const contactTrigger = event.target.closest('[data-open-contact]');
-    const selectedPriority = getSelectedPriority();
-
-    if (contactTrigger && experienceState.blueprint) {
-      pendingContactPrefill = {
-        name: experienceState.name,
-        email: experienceState.email,
-        company: experienceState.businessName,
-        teamType: 'General Inquiry',
-        message: `I completed the Expult Automation Test Drive for ${experienceState.businessName}. We are focused on ${selectedPriority.toLowerCase()} and want to discuss the blueprint.`
-      };
-    }
 
     if (actionTrigger) {
       const action = actionTrigger.getAttribute('data-step-action');
@@ -1056,7 +1269,7 @@ const initializeExperienceModal = () => {
 
         if (!selectedBusinessType) {
           experienceState.errorMessage = 'Select a business type or enter your custom option to continue.';
-          renderExperienceWizard();
+          refreshExperienceUI();
           return;
         }
 
@@ -1074,8 +1287,24 @@ const initializeExperienceModal = () => {
         experienceState.errorMessage = '';
       }
 
-      if (action === 'generate-blueprint' && getSelectedPriority() && !experienceState.isSubmitting) {
+      if (action === 'generate-blueprint' && getSelectedPriorities().length && !experienceState.isSubmitting) {
         await submitExperienceBlueprint();
+        return;
+      }
+
+      if (action === 'open-followup-now') {
+        completeDemoFlow();
+        return;
+      }
+
+      if (action === 'finish-demo') {
+        stopDemoCountdown();
+        experienceState = {
+          ...experienceState,
+          followupVisible: true,
+          appointmentRequestError: ''
+        };
+        dismissExperienceModal();
         return;
       }
 
@@ -1084,8 +1313,7 @@ const initializeExperienceModal = () => {
         experienceState = createInitialExperienceState();
       }
 
-      renderExperienceWizard();
-      syncExperienceActionState();
+      refreshExperienceUI();
       return;
     }
 
@@ -1099,8 +1327,7 @@ const initializeExperienceModal = () => {
       }
 
       experienceState.errorMessage = '';
-      renderExperienceWizard();
-      syncExperienceActionState();
+      refreshExperienceUI();
 
       if (selectedValue === otherOptionValue) {
         focusWizardInput('#experienceBusinessTypeOther');
@@ -1111,18 +1338,23 @@ const initializeExperienceModal = () => {
 
     if (priorityTrigger) {
       const selectedValue = priorityTrigger.getAttribute('data-priority') || '';
+      const prioritySelections = Array.isArray(experienceState.prioritySelections)
+        ? experienceState.prioritySelections
+        : [];
+      const wasSelected = prioritySelections.includes(selectedValue);
 
-      experienceState.prioritySelection = selectedValue;
+      experienceState.prioritySelections = wasSelected
+        ? prioritySelections.filter((value) => value !== selectedValue)
+        : [...prioritySelections, selectedValue];
 
-      if (selectedValue !== otherOptionValue) {
+      if (selectedValue === otherOptionValue && wasSelected) {
         experienceState.priorityCustom = '';
       }
 
       experienceState.errorMessage = '';
-      renderExperienceWizard();
-      syncExperienceActionState();
+      refreshExperienceUI();
 
-      if (selectedValue === otherOptionValue) {
+      if (!wasSelected && selectedValue === otherOptionValue) {
         focusWizardInput('#experiencePriorityOther');
       }
     }
@@ -1159,11 +1391,11 @@ const initializeExperienceModal = () => {
     }
 
     if (event.target.id === 'experiencePriorityOther') {
-      const selectedPriorityValue = getSelectedPriority();
+      const selectedPriorities = getSelectedPriorities();
 
-      if (selectedPriorityValue) {
+      if (selectedPriorities.length) {
         try {
-          await persistDraftProgress({ priority: selectedPriorityValue }, { silent: true });
+          await persistDraftProgress({ priorities: selectedPriorities }, { silent: true });
         } catch {
           // no-op: silent mode handles the warning path
         }
@@ -1199,7 +1431,7 @@ const initializeExperienceModal = () => {
       isSavingDraft: true
     };
 
-    renderExperienceWizard();
+    refreshExperienceUI();
 
     try {
       const savedDraft = experienceState.draftId
@@ -1219,26 +1451,150 @@ const initializeExperienceModal = () => {
       };
     }
 
-    renderExperienceWizard();
-    syncExperienceActionState();
+    refreshExperienceUI();
+  });
+
+  followupHost.addEventListener('click', (event) => {
+    const followupAction = event.target.closest('[data-followup-action]');
+
+    if (!followupAction) {
+      return;
+    }
+
+    const action = followupAction.getAttribute('data-followup-action');
+
+    if (action === 'reopen-blueprint') {
+      experienceState = {
+        ...experienceState,
+        returningFromFollowup: true,
+        followupVisible: false,
+        appointmentRequestError: ''
+      };
+      refreshExperienceUI();
+      reopenTrigger.click();
+      return;
+    }
+
+    if (action === 'complete-followup') {
+      resetExperienceDemo();
+      return;
+    }
+
+    if (action === 'toggle-schedule' && !experienceState.appointmentRequested) {
+      experienceState = {
+        ...experienceState,
+        scheduleCallVisible: true,
+        appointmentRequestError: ''
+      };
+      renderExperienceFollowup();
+      window.requestAnimationFrame(() => {
+        document.querySelector('#experienceReconfirmedEmail')?.focus();
+      });
+    }
+  });
+
+  followupHost.addEventListener('submit', async (event) => {
+    if (event.target.id !== 'experienceFollowupForm') {
+      return;
+    }
+
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const reconfirmedEmail = String(formData.get('email') || '').trim();
+
+    if (!reconfirmedEmail) {
+      experienceState = {
+        ...experienceState,
+        scheduleCallVisible: true,
+        reconfirmedEmailInput: reconfirmedEmail,
+        appointmentRequestError: 'Please re-enter your email to request your appointment.',
+        appointmentRequestMessage: ''
+      };
+      renderExperienceFollowup();
+      return;
+    }
+
+    if (!experienceState.draftId) {
+      experienceState = {
+        ...experienceState,
+        scheduleCallVisible: true,
+        reconfirmedEmailInput: reconfirmedEmail,
+        appointmentRequestError: 'We could not find your automation record. Please reopen your blueprint and try again.',
+        appointmentRequestMessage: ''
+      };
+      renderExperienceFollowup();
+      return;
+    }
+
+    experienceState = {
+      ...experienceState,
+      scheduleCallVisible: true,
+      reconfirmedEmailInput: reconfirmedEmail,
+      isRequestingAppointment: true,
+      appointmentRequestError: '',
+      appointmentRequestMessage: ''
+    };
+    renderExperienceFollowup();
+
+    try {
+      const response = await fetch(`${apiBaseUrl}/api/automation-test-drive/${experienceState.draftId}/hot-lead`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: reconfirmedEmail })
+      });
+      const data = await parseApiResponse(response, 'We could not trigger your appointment request right now.');
+
+      experienceState = {
+        ...experienceState,
+        scheduleCallVisible: true,
+        reconfirmedEmailInput:
+          data.draft?.reenteredEmail || data.draft?.reconfirmedEmail || data.draft?.confirmedContactEmail || reconfirmedEmail,
+        isRequestingAppointment: false,
+        appointmentRequested: true,
+        appointmentRequestMessage: data.message || appointmentRequestSuccessMessage,
+        appointmentRequestError: ''
+      };
+      renderExperienceFollowup();
+    } catch (error) {
+      experienceState = {
+        ...experienceState,
+        scheduleCallVisible: true,
+        reconfirmedEmailInput: reconfirmedEmail,
+        isRequestingAppointment: false,
+        appointmentRequestError: error.message || 'We could not trigger your appointment request right now.',
+        appointmentRequestMessage: ''
+      };
+      renderExperienceFollowup();
+    }
   });
 
   experienceModal.addEventListener('show.bs.modal', () => {
+    if (experienceState.followupVisible) {
+      experienceState = {
+        ...experienceState,
+        followupVisible: false
+      };
+      renderExperienceFollowup();
+    }
+
     restoreDraftFromStorage().catch((error) => {
       experienceState = {
         ...createInitialExperienceState(),
         errorMessage: error.message || 'We could not restore your saved draft right now.'
       };
-      renderExperienceWizard();
+      refreshExperienceUI();
     });
   });
 
   experienceModal.addEventListener('hidden.bs.modal', () => {
     const selectedBusinessType = getSelectedBusinessType();
-    const selectedPriorityValue = getSelectedPriority();
+    const selectedPriorities = getSelectedPriorities();
     const payload = {
       ...(selectedBusinessType ? { businessType: selectedBusinessType } : {}),
-      ...(selectedPriorityValue ? { priority: selectedPriorityValue } : {})
+      ...(selectedPriorities.length ? { priorities: selectedPriorities } : {})
     };
 
     persistDraftProgress(payload, { silent: true }).catch(() => {});
@@ -1248,8 +1604,10 @@ const initializeExperienceModal = () => {
       errorMessage: '',
       isSavingDraft: false,
       isSubmitting: false,
-      isRestoringDraft: false
+      isRestoringDraft: false,
+      followupVisible: Boolean(experienceState.blueprint && experienceState.demoFlowComplete)
     };
+    renderExperienceFollowup();
   });
 };
 

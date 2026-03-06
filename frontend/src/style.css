@@ -753,6 +753,79 @@ button {
   flex-shrink: 0;
 }
 
+.demo-complete-card {
+  display: grid;
+  gap: 0.35rem;
+  min-width: min(100%, 18rem);
+  padding: 0.9rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 122, 69, 0.22);
+  background: linear-gradient(135deg, rgba(255, 106, 61, 0.14), rgba(255, 255, 255, 0.04));
+  text-align: left;
+}
+
+.demo-complete-card-button {
+  width: 100%;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.demo-complete-card-button:focus-visible {
+  outline: 2px solid rgba(255, 171, 134, 0.92);
+  outline-offset: 3px;
+}
+
+.demo-complete-card p {
+  margin: 0;
+}
+
+.experience-followup-host {
+  position: fixed;
+  right: 1.2rem;
+  bottom: 1.2rem;
+  z-index: 1085;
+  width: min(30rem, calc(100vw - 2.4rem));
+}
+
+.experience-followup-panel {
+  display: grid;
+  gap: 0.9rem;
+  padding: 1rem;
+  border-radius: 1.1rem;
+  border: 1px solid rgba(255, 122, 69, 0.22);
+  color: #f4f1ee;
+  background: rgba(42, 31, 27, 0.97);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.34);
+}
+
+.experience-followup-copy {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.experience-followup-copy h3,
+.experience-followup-copy p {
+  margin: 0;
+}
+
+.experience-followup-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.experience-followup-form {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.experience-followup-input-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.7rem;
+}
+
 @keyframes pulseGlow {
   0%,
   100% {
@@ -775,6 +848,12 @@ button {
   .hero-section {
     min-height: auto;
     padding: 4.5rem 0 4rem;
+  }
+
+  .experience-followup-host {
+    right: 1rem;
+    left: 1rem;
+    width: auto;
   }
 
   .business-type-grid {
@@ -827,5 +906,9 @@ button {
   .experience-actions .btn {
     min-width: 0;
     width: 100%;
+  }
+
+  .experience-followup-input-row {
+    grid-template-columns: 1fr;
   }
 }
