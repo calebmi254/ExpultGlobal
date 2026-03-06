@@ -1,0 +1,21 @@
+{
+  "name": "expult-global-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Vite frontend for Expult Global",
+  "scripts": {
+    "dev": "vite --port 5173",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bootstrap": "^5.3.8"
+  },
+  "devDependencies": {
+    "vite": "^7.3.1"
+  }
+}
