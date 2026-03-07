@@ -4,7 +4,9 @@ import './style.css';
 
 const app = document.querySelector('#app');
 const heroImageUrl = new URL('../assets/images/created for website.png', import.meta.url).href;
-const apiBaseUrl = window.location.hostname === 'localhost' ? 'http://localhost:5000' : '';
+const apiBaseUrl = (
+  import.meta.env.VITE_API_BASE_URL || (window.location.hostname === 'localhost' ? 'http://localhost:5000' : '')
+).replace(/\/$/, '');
 
 const services = [
   'Revenue Automation Systems',
