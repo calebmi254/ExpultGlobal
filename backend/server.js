@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const automationRoutes = require('./routes/automation.routes');
+const chatbotRoutes = require('./routes/chatbot.routes');
 const contactRoutes = require('./routes/contact.routes');
 const {
   port: PORT,
@@ -52,6 +53,8 @@ app.get('/api/company', (_req, res) => {
 });
 
 app.use('/api/contact', contactRoutes);
+
+app.use('/api/chatbot', chatbotRoutes);
 
 app.use('/api/automation-test-drive', automationRoutes);
 

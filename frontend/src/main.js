@@ -49,6 +49,96 @@ const revenueSubsystems = [
   }
 ];
 
+const aboutArchitectureIcons = {
+  identity:
+    '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 12.25a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z" stroke="currentColor" stroke-width="1.6"/><path d="M5.5 19.25a6.5 6.5 0 0 1 13 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+  mission:
+    '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="7.25" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3.25" stroke="currentColor" stroke-width="1.6"/><path d="M12 2.75v2.1M12 19.15v2.1M21.25 12h-2.1M4.85 12h-2.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+  capabilities:
+    '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4.5" y="4.5" width="6" height="6" rx="1.4" stroke="currentColor" stroke-width="1.6"/><rect x="13.5" y="4.5" width="6" height="6" rx="1.4" stroke="currentColor" stroke-width="1.6"/><rect x="4.5" y="13.5" width="6" height="6" rx="1.4" stroke="currentColor" stroke-width="1.6"/><path d="M16.5 13.5v6M13.5 16.5h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+  values:
+    '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5.1 13.85 8.85l4.15.6-3 2.93.7 4.12L12 14.55 8.3 16.5l.7-4.12-3-2.93 4.15-.6L12 5.1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 8.75v3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+  methods:
+    '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7.25 6.5h5.25a3 3 0 0 1 3 3v1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="m13.75 8.75 1.75 1.75 1.75-1.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.75 17.5h-5.25a3 3 0 0 1-3-3v-1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="m10.25 15.25-1.75-1.75-1.75 1.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  directions:
+    '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="7.25" stroke="currentColor" stroke-width="1.6"/><path d="m10 14 5-5-1.05 4.05L10 14Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 4.75v1.5M19.25 12h-1.5M12 19.25v-1.5M4.75 12h1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>'
+};
+
+const aboutArchitectureNodes = [
+  {
+    number: '01',
+    tone: 'teal',
+    icon: aboutArchitectureIcons.identity,
+    label: 'Identity',
+    title: 'Who We Are',
+    callout: 'We build intelligent digital systems that replace disconnected manual workflows.',
+    summary: 'Expult Global builds intelligent digital systems that help businesses operate efficiently, automate critical workflows, and grow revenue with more structure.',
+    body:
+      'The company focuses on modern digital infrastructure for teams that want to move beyond manual processes and disconnected tools into scalable operating systems.',
+    points: ['Technology company rooted in automation and software systems', 'Builds connected infrastructure for operations and growth', 'Helps businesses replace manual work with scalable workflows']
+  },
+  {
+    number: '02',
+    tone: 'crimson',
+    icon: aboutArchitectureIcons.mission,
+    label: 'Mission',
+    title: 'Our Mission',
+    callout: 'Our mission is to turn fragmented tools into integrated systems for growth.',
+    summary: 'The mission is to help businesses transition from fragmented digital tools into integrated systems that improve productivity, customer engagement, and sustainable growth.',
+    body:
+      'Expult Global develops infrastructure that keeps working in the background so sales, service, and internal operations stay connected and reliable.',
+    points: ['Reduce fragmentation across tools and workflows', 'Improve efficiency through connected automation', 'Support stronger customer and revenue systems']
+  },
+  {
+    number: '03',
+    tone: 'orange',
+    icon: aboutArchitectureIcons.capabilities,
+    label: 'Capabilities',
+    title: 'What We Build',
+    callout: 'We create AI support, automation, websites, funnels, data tools, and custom software.',
+    summary: 'Expult Global develops practical technology solutions that solve real operational problems for modern organizations.',
+    body:
+      'Each solution is designed as part of a wider ecosystem that supports efficiency, customer flow, decision-making, and long-term revenue performance.',
+    points: ['AI-powered customer support systems', 'Business process automation tools', 'High-converting websites and funnels', 'Data and intelligence platforms', 'Custom software for operational needs']
+  },
+  {
+    number: '04',
+    tone: 'amber',
+    icon: aboutArchitectureIcons.values,
+    label: 'Values',
+    title: 'Why Businesses Work With Us',
+    callout: 'Clients choose us for measurable efficiency, response speed, and stronger revenue flow.',
+    summary: 'Businesses choose Expult Global for systems that create measurable operational and financial value.',
+    body:
+      'The focus is not just on building digital products but on creating infrastructure that helps teams capture opportunities, respond faster, and scale more confidently.',
+    points: ['Capture and convert more qualified leads', 'Automate repetitive operational tasks', 'Improve response speed and data visibility', 'Create scalable platforms for long-term growth']
+  },
+  {
+    number: '05',
+    tone: 'orange',
+    icon: aboutArchitectureIcons.methods,
+    label: 'Methods',
+    title: 'Our Approach',
+    callout: 'Every solution is designed as part of one connected operating system.',
+    summary: 'Expult Global applies systems thinking, building connected digital architectures rather than isolated tools.',
+    body:
+      'Lead capture, follow-up, CRM, payment, and insight layers are designed to work together so businesses can reduce missed opportunities and operate with more consistency.',
+    points: ['Designs integrated ecosystems instead of one-off assets', 'Connects customer journeys from inquiry to purchase', 'Builds automation that runs continuously in the background']
+  },
+  {
+    number: '06',
+    tone: 'gold',
+    icon: aboutArchitectureIcons.directions,
+    label: 'Directions',
+    title: 'Vision for the Future',
+    callout: 'Our vision is enterprise-grade digital infrastructure made accessible to more businesses.',
+    summary: 'Expult Global is building toward a future where advanced digital infrastructure is accessible to more businesses, not only large enterprises.',
+    body:
+      'Through automation systems, intelligent software, and data-driven tools, the company aims to help organizations compete more effectively in a technology-driven global economy.',
+    points: ['Expand access to enterprise-style digital infrastructure', 'Empower businesses with intelligent systems', 'Support stronger participation in the digital economy']
+  }
+];
+
 const serviceCardIcons = {
   support:
     '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4.5a7.5 7.5 0 0 0-7.5 7.5v2.75A2.75 2.75 0 0 0 7.25 17.5H8.5v-6H7.25A2.74 2.74 0 0 0 5 12c0-3.87 3.13-7 7-7s7 3.13 7 7a2.74 2.74 0 0 0-2.25-.5H15.5v6h1.25c1.52 0 2.75-1.23 2.75-2.75V12A7.5 7.5 0 0 0 12 4.5Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.5 19.25h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M14.5 19.25A1.75 1.75 0 0 1 12.75 21h-1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
@@ -67,6 +157,28 @@ const serviceCardIcons = {
   value:
     '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5.25 13.97 9.24l4.4.64-3.18 3.1.75 4.38L12 15.3l-3.94 2.07.75-4.38-3.18-3.1 4.4-.64L12 5.25Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>'
 };
+
+const contactSectionIcons = {
+  contact:
+    '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5.75 7.5A2.75 2.75 0 0 1 8.5 4.75h7A2.75 2.75 0 0 1 18.25 7.5v9A2.75 2.75 0 0 1 15.5 19.25h-7a2.75 2.75 0 0 1-2.75-2.75v-9Z" stroke="currentColor" stroke-width="1.6"/><path d="m7 8.5 5 4 5-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  chat:
+    '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7.75 18.5h7.5a5.75 5.75 0 1 0 0-11.5h-6.5A4.75 4.75 0 0 0 4 11.75v1a4.75 4.75 0 0 0 4.75 4.75h.35l1.65 2 .75-2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 11.75h6M9 14.75h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>'
+};
+
+const footerSocialIcons = {
+  linkedin:
+    '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 10.25v6.25" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M12 16.5v-3.5a2 2 0 0 1 4 0v3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 7.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" fill="currentColor"/><rect x="4.75" y="4.75" width="14.5" height="14.5" rx="3.25" stroke="currentColor" stroke-width="1.5"/></svg>',
+  instagram:
+    '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4.75" y="4.75" width="14.5" height="14.5" rx="4" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3.35" stroke="currentColor" stroke-width="1.5"/><circle cx="16.4" cy="7.6" r="0.9" fill="currentColor"/></svg>',
+  x:
+    '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.5 5.75 17.5 18.25" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M17.5 5.75 6.5 18.25" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><rect x="4.75" y="4.75" width="14.5" height="14.5" rx="3.25" stroke="currentColor" stroke-width="1.5"/></svg>'
+};
+
+const footerSocialLinks = [
+  { label: 'LinkedIn', icon: footerSocialIcons.linkedin, href: '#' },
+  { label: 'Instagram', icon: footerSocialIcons.instagram, href: '#' },
+  { label: 'X', icon: footerSocialIcons.x, href: '#' }
+];
 
 const otherServices = [
   {
@@ -146,6 +258,20 @@ const otherServices = [
   }
 ];
 
+const clientNames = [
+  'Nanjo Enterprises',
+  'Pendullum VSL',
+  'Bailey Cons.',
+  'Expult Cars',
+  'Coldfire',
+  'ICL Int Lawyers',
+  'JedMon',
+  'Jian',
+  'Amber',
+  'Cici',
+  'WriteDom'
+];
+
 const businessTypes = ['Car dealership', 'Restaurant', 'Online store', 'Real estate', 'Service business'];
 const otherOptionValue = '__other__';
 const experienceDraftStorageKey = 'expultExperienceDraftId';
@@ -175,7 +301,37 @@ const priorityLabels = priorityOptions.map(({ label }) => label);
 
 const experienceWizardSteps = ['Your details', 'Business type', 'Growth priorities', 'Blueprint'];
 
+const chatStarterPrompts = [
+  'What services does Expult Global offer?',
+  'Do you build AI chat assistants for websites?',
+  'Which solution is best for automating lead follow-up?'
+];
+
 let pendingContactPrefill = null;
+
+const createInitialChatState = () => ({
+  isActive: false,
+  isLoadingServices: false,
+  isSending: false,
+  errorMessage: '',
+  services: [],
+  messages: [
+    {
+      role: 'assistant',
+      content: 'Hi, I’m Expult AI bot. Ask me about approved Expult services, automation systems, AI assistants, websites, data systems, or custom software.',
+      matchedServices: [],
+      followUpQuestion: '',
+      leadCapture: null
+    }
+  ],
+  lead: {
+    name: '',
+    email: '',
+    company: '',
+    serviceInterest: '',
+    requestHumanFollowUp: false
+  }
+});
 
 const createInitialExperienceState = () => ({
   step: 1,
@@ -205,6 +361,7 @@ const createInitialExperienceState = () => ({
 });
 
 let experienceState = createInitialExperienceState();
+let chatbotState = createInitialChatState();
 
 const escapeHtml = (value = '') =>
   String(value)
@@ -213,6 +370,77 @@ const escapeHtml = (value = '') =>
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
+
+const renderServiceInterestOptions = (serviceItems = services) =>
+  serviceItems
+    .map((service) => {
+      const label = typeof service === 'string' ? service : service?.title || service?.name || service?.label || service?.slug || 'Service';
+      return `<option value="${escapeHtml(label)}">${escapeHtml(label)}</option>`;
+    })
+    .join('');
+
+const getTeamTypeFromLabel = (label = '') => {
+  if (label.includes('Service')) {
+    return 'Service Businesses';
+  }
+
+  if (label.includes('Enterprise')) {
+    return 'Enterprise Teams';
+  }
+
+  if (label.includes('Founder')) {
+    return 'Founders';
+  }
+
+  return 'General Inquiry';
+};
+
+const renderAboutPanelContent = ({ number, label, title, summary, body, points, icon }) => `
+  <div class="about-architecture-panel-content">
+    <span class="about-panel-shell" aria-hidden="true"></span>
+
+    <div class="about-panel-head">
+      <span class="about-panel-icon-badge">
+        <span class="about-panel-symbol" aria-hidden="true">${icon}</span>
+        <span class="about-panel-number">${escapeHtml(number)}</span>
+      </span>
+
+      <div class="about-panel-head-copy">
+        <span class="about-panel-kicker">${escapeHtml(label)}</span>
+        <h3>${escapeHtml(title)}</h3>
+      </div>
+    </div>
+
+    <p class="about-panel-summary">${escapeHtml(summary)}</p>
+
+    <div class="about-panel-value">
+      <span class="about-panel-value-icon" aria-hidden="true">${icon}</span>
+      <div class="about-panel-value-copy">
+        <span class="about-panel-label">Expanded view</span>
+        <p class="about-panel-body">${escapeHtml(body)}</p>
+      </div>
+    </div>
+
+    <div class="about-panel-stack">
+      <div class="about-panel-stack-head">
+        <span class="about-panel-label">Key focus areas</span>
+      </div>
+
+      <ul class="about-panel-list">
+        ${points
+          .map(
+            (point) => `
+              <li class="about-panel-list-item">
+                <span class="about-panel-list-dot" aria-hidden="true"></span>
+                <span>${escapeHtml(point)}</span>
+              </li>
+            `
+          )
+          .join('')}
+      </ul>
+    </div>
+  </div>
+`;
 
 const getStoredExperienceDraftId = () => window.localStorage.getItem(experienceDraftStorageKey) || '';
 
@@ -369,24 +597,26 @@ const fetchExperienceDraft = async (draftId) => {
 };
 
 const renderDropdownItems = (items, type) => {
-  const targetModal = type === 'service' ? 'experienceModal' : 'contactModal';
-
   return items
-    .map(
-      (item) => `
+    .map((item) => {
+      if (type === 'service') {
+        return `
+          <li>
+            <button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#experienceModal">
+              ${escapeHtml(item)}
+            </button>
+          </li>
+        `;
+      }
+
+      return `
         <li>
-          <button
-            class="dropdown-item"
-            type="button"
-            data-bs-toggle="modal"
-            data-bs-target="#${targetModal}"
-            ${type === 'solution' ? `data-team-type="${item}"` : ''}
-          >
-            ${item}
+          <button class="dropdown-item" type="button" data-contact-target="form" data-team-type="${escapeHtml(item)}">
+            ${escapeHtml(item)}
           </button>
         </li>
-      `
-    )
+      `;
+    })
     .join('');
 };
 
@@ -882,15 +1112,15 @@ const renderApp = () => {
                     ${renderDropdownItems(solutions, 'solution')}
                   </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="#home">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about-expult">About</a></li>
                 <li class="nav-item">
-                  <button class="nav-link btn btn-link" type="button" data-bs-toggle="modal" data-bs-target="#contactModal">
+                  <button class="nav-link btn btn-link" type="button" data-contact-target="form">
                     Contact
                   </button>
                 </li>
               </ul>
 
-              <button class="btn btn-contact ms-lg-3" type="button" data-bs-toggle="modal" data-bs-target="#contactModal">
+              <button class="btn btn-contact ms-lg-3" type="button" data-contact-target="form">
                 Talk to Us
               </button>
             </div>
@@ -937,67 +1167,13 @@ const renderApp = () => {
 
       ${renderRevenueSubsystemSection()}
       ${renderOtherServicesSection()}
+      ${renderAboutSection()}
+      ${renderClientsSection()}
+      ${renderContactSection()}
+      ${renderFooterSection()}
     </div>
 
-    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content contact-modal">
-          <div class="modal-header modal-header-centered border-0 pb-0">
-            <div class="modal-header-copy">
-              <span class="modal-eyebrow">Expult Global</span>
-              <h2 class="modal-title" id="contactModalLabel">Start Your Automation Conversation</h2>
-              <p class="modal-subcopy mb-0">
-                Tell us what you want to automate and we will follow up with the right next step for your team.
-              </p>
-            </div>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body pt-4">
-            <div id="contactFeedback" class="mb-3"></div>
-
-            <form id="contactForm" class="contact-form-shell" novalidate>
-              <div class="row g-3">
-                <div class="col-md-6">
-                  <label class="form-label" for="name">Name</label>
-                  <input class="form-control" id="name" name="name" type="text" placeholder="Your name" required />
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label" for="email">Email</label>
-                  <input class="form-control" id="email" name="email" type="email" placeholder="you@company.com" required />
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label" for="company">Company</label>
-                  <input class="form-control" id="company" name="company" type="text" placeholder="Company or brand" required />
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label" for="teamType">Team Type</label>
-                  <select class="form-select" id="teamType" name="teamType" required>
-                    <option value="">Select your team</option>
-                    <option>Service Businesses</option>
-                    <option>Enterprise Teams</option>
-                    <option>Founders</option>
-                    <option>General Inquiry</option>
-                  </select>
-                </div>
-                <div class="col-12">
-                  <label class="form-label" for="message">What do you want to automate?</label>
-                  <textarea class="form-control" id="message" name="message" rows="4" placeholder="Describe the revenue or operations challenge you want Expult Global to solve." required></textarea>
-                </div>
-              </div>
-
-              <div class="experience-actions modal-actions mt-4">
-                <div class="experience-actions-side">
-                  <button class="btn btn-ghost" id="contactCloseButton" type="button" data-bs-dismiss="modal">Close</button>
-                </div>
-                <div class="experience-actions-side experience-actions-side-right">
-                  <button class="btn btn-primary-glow" id="contactSubmitButton" type="submit">Send Request</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+    ${renderContactModal()}
 
     <div class="modal fade" id="experienceModal" tabindex="-1" aria-labelledby="experienceModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg experience-modal-dialog">
@@ -1035,6 +1211,54 @@ const renderApp = () => {
       tabindex="-1"
       aria-hidden="true"
     ></button>
+  `;
+};
+
+const renderAboutSection = () => {
+  const initialIndex = 0;
+  const initialNode = aboutArchitectureNodes[initialIndex];
+
+  return `
+    <section class="about-architecture-section" id="about-expult" aria-labelledby="aboutExpultTitle">
+      <div class="container about-architecture-layout">
+        <div class="about-architecture-intro">
+          <span class="hero-eyebrow">Company Architecture</span>
+          <h2 id="aboutExpultTitle">About Expult Global</h2>
+          <p class="subsystems-copy about-architecture-copy">
+            Explore the core ideas behind Expult Global through a structured company architecture. Each circle opens a deeper view into the identity, mission, capabilities, values, methods, and direction guiding the company.
+          </p>
+        </div>
+
+        <div class="about-architecture-gallery" aria-label="Interactive Expult Global company architecture lightbox gallery">
+          <span class="about-architecture-gallery-line" aria-hidden="true"></span>
+          ${aboutArchitectureNodes
+            .map(
+              ({ label, icon }, index) => `
+                <article class="about-gallery-step ${index === initialIndex ? 'active' : 'inactive'}" data-about-step="${index}">
+                  <button
+                    class="about-gallery-node"
+                    type="button"
+                    data-about-index="${index}"
+                    aria-pressed="${index === initialIndex ? 'true' : 'false'}"
+                    aria-controls="aboutArchitecturePanel"
+                    aria-label="Show ${escapeHtml(label)} details"
+                  >
+                    <span class="about-gallery-node-circle" aria-hidden="true">
+                      <span class="about-gallery-node-icon">${icon}</span>
+                      <span class="about-gallery-node-label">${escapeHtml(label)}</span>
+                    </span>
+                  </button>
+                </article>
+              `
+            )
+            .join('')}
+        </div>
+
+        <aside class="about-architecture-focus is-fading-in" id="aboutArchitecturePanel" aria-live="polite">
+          ${renderAboutPanelContent(initialNode)}
+        </aside>
+      </div>
+    </section>
   `;
 };
 
@@ -1143,8 +1367,7 @@ const renderOtherServicesSection = () => {
                       <button
                         class="btn btn-primary-glow service-card-action"
                         type="button"
-                        data-bs-toggle="modal"
-                        data-bs-target="#contactModal"
+                        data-contact-target="form"
                         data-team-type="General Inquiry"
                       >
                         ${escapeHtml(service.ctaLabel)}
@@ -1208,6 +1431,275 @@ const renderOtherServicesSection = () => {
   `;
 };
 
+const renderContactSection = () => {
+  return `
+    <section class="contact-section" id="contact-us" aria-labelledby="contactUsTitle">
+      <div class="container contact-layout">
+        <div class="section-heading section-heading-centered contact-heading">
+          <span class="hero-eyebrow">Contact Us</span>
+          <h2 id="contactUsTitle">Start a conversation with Expult Global</h2>
+          <p class="subsystems-copy contact-copy">
+            Choose the route that fits your team best. Open the contact form for a project brief or use the embedded chat to ask grounded questions about approved Expult services.
+          </p>
+        </div>
+
+        <div class="contact-split-shell">
+          <article class="contact-panel contact-panel-form" id="contactFormPanel">
+            <div class="contact-panel-intro">
+              <div class="contact-panel-copy">
+                <span class="contact-panel-kicker">Leave us a message</span>
+                <h3>Tell us what you want to build</h3>
+                <p>
+                  Share the workflow, platform, or automation goal you want Expult Global to solve and we will follow up with the right next step.
+                </p>
+                <button class="btn btn-primary-glow" type="button" data-contact-target="form">Leave message</button>
+              </div>
+
+              <button
+                class="contact-activation-button"
+                type="button"
+                data-contact-target="form"
+                aria-controls="contactModal"
+                aria-haspopup="dialog"
+              >
+                <span class="contact-panel-icon" aria-hidden="true">${contactSectionIcons.contact}</span>
+              </button>
+            </div>
+          </article>
+
+          <span class="contact-split-divider" aria-hidden="true"></span>
+
+          <article class="contact-panel contact-panel-chat" id="contactChatPanel">
+            <div class="contact-panel-intro contact-chat-intro" id="chatIntroPanel">
+              <button
+                class="contact-activation-button"
+                type="button"
+                data-contact-target="chat"
+                aria-controls="contactChatApp"
+                aria-expanded="false"
+              >
+                <span class="contact-panel-icon" aria-hidden="true">${contactSectionIcons.chat}</span>
+              </button>
+
+              <div class="contact-panel-copy">
+                <span class="contact-panel-kicker">Messaging interface</span>
+                <h3>Chat with Us</h3>
+                <p>
+                  Experience instant responses for approved Expult services and more. Learn more about our culture and way of workings.
+                </p>
+                <button class="btn btn-primary-glow" type="button" data-contact-target="chat">Chat with Us</button>
+              </div>
+            </div>
+
+              <div class="contact-chat-shell">
+                <div class="contact-chat-app" id="contactChatApp" aria-hidden="true">
+                <div class="contact-chat-header">
+                  <div>
+                    <span class="contact-chat-header-label">Expult AI bot</span>
+                    <p>Lets have a beneficial talk.</p>
+                  </div>
+                  <div class="contact-chat-header-actions">
+                    <button class="btn btn-ghost contact-chat-restart" id="chatRestartButton" type="button" aria-label="Start a new conversation">
+                      <span class="contact-chat-restart-icon" aria-hidden="true">+</span>
+                    </button>
+                    <button class="btn btn-ghost contact-chat-close" id="chatCloseButton" type="button" aria-label="Close chat">
+                      <span class="contact-chat-close-icon" aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div id="chatFeedback" class="mb-3"></div>
+                <div class="contact-chat-service-strip-shell" aria-label="Quick messages">
+                  <button
+                    class="btn btn-ghost contact-chat-strip-button is-left"
+                    id="chatServiceStripPrev"
+                    type="button"
+                    aria-label="Scroll quick messages left"
+                    hidden
+                  >
+                    <span aria-hidden="true">‹</span>
+                  </button>
+                  <div class="contact-chat-service-strip-viewport">
+                    <div class="contact-chat-service-strip" id="chatbotServiceChips" aria-label="Approved Expult services"></div>
+                  </div>
+                  <button
+                    class="btn btn-ghost contact-chat-strip-button is-right"
+                    id="chatServiceStripNext"
+                    type="button"
+                    aria-label="Scroll quick messages right"
+                    hidden
+                  >
+                    <span aria-hidden="true">›</span>
+                  </button>
+                </div>
+                <div class="contact-chat-messages" id="chatMessageList" aria-live="polite"></div>
+
+                <form class="contact-chat-composer" id="chatComposer" novalidate>
+                  <label class="visually-hidden" for="chatMessageInput">Ask Expult Support a question</label>
+                  <textarea
+                    class="form-control contact-chat-input"
+                    id="chatMessageInput"
+                    rows="1"
+                    placeholder="Type message here..."
+                    disabled
+                    required
+                  ></textarea>
+                  <button class="btn btn-primary-glow contact-chat-send" id="chatSendButton" type="submit" disabled>
+                    Send
+                  </button>
+                </form>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  `;
+};
+
+const renderFooterSection = () => {
+  const socialLinksMarkup = footerSocialLinks
+    .map(
+      ({ label, icon, href }) => `
+        <a class="site-footer-social-link" href="${href}" aria-label="Visit Expult Global on ${label}">
+          <span aria-hidden="true">${icon}</span>
+        </a>
+      `
+    )
+    .join('');
+
+  return `
+    <footer class="site-footer" aria-label="Site footer">
+      <div class="container site-footer-layout">
+        <p class="site-footer-copy">Powered by <span class="site-footer-brand">Expult Global</span></p>
+        <div class="site-footer-socials" aria-label="Social media links">
+          ${socialLinksMarkup}
+        </div>
+      </div>
+    </footer>
+  `;
+};
+
+const renderContactModal = () => {
+  return `
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+      <div class="modal-dialog contact-modal-dialog">
+        <div class="modal-content contact-modal">
+          <div class="modal-header border-0 pb-0 contact-modal-header">
+            <div class="contact-modal-header-title">
+              <span class="contact-panel-icon contact-modal-icon" aria-hidden="true">${contactSectionIcons.chat}</span>
+              <h2 class="modal-title mb-0" id="contactModalLabel">Chat with Us</h2>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body pt-3">
+            <div class="contact-form-wrap contact-modal-form-wrap">
+              <div id="contactFeedback" class="mb-3"></div>
+
+              <form id="contactForm" class="contact-form-shell" novalidate>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label" for="contactName">Name</label>
+                    <input class="form-control" id="contactName" name="name" type="text" placeholder="Your name" required />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="contactEmail">Email</label>
+                    <input class="form-control" id="contactEmail" name="email" type="email" placeholder="you@company.com" required />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="contactCompany">Company</label>
+                    <input class="form-control" id="contactCompany" name="company" type="text" placeholder="Company or brand" required />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="teamType">Team Type</label>
+                    <select class="form-select" id="teamType" name="teamType" required>
+                      <option value="">Select your team</option>
+                      <option>Service Businesses</option>
+                      <option>Enterprise Teams</option>
+                      <option>Founders</option>
+                      <option>General Inquiry</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label" for="contactMessage">What do you want to automate?</label>
+                    <textarea
+                      class="form-control"
+                      id="contactMessage"
+                      name="message"
+                      rows="4"
+                      placeholder="Describe the revenue or operations challenge you want Expult Global to solve."
+                      required
+                    ></textarea>
+                  </div>
+                </div>
+
+                <div class="experience-actions modal-actions mt-4">
+                  <div class="experience-actions-side">
+                    <button class="btn btn-ghost" type="button" data-bs-dismiss="modal">Close</button>
+                  </div>
+                  <div class="experience-actions-side experience-actions-side-right">
+                    <button class="btn btn-primary-glow" id="contactSubmitButton" type="submit">Send Request</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button
+      class="d-none"
+      id="contactModalReopenTrigger"
+      type="button"
+      data-bs-toggle="modal"
+      data-bs-target="#contactModal"
+      tabindex="-1"
+      aria-hidden="true"
+    ></button>
+  `;
+};
+
+const renderClientsSection = () => {
+  const clientItems = clientNames
+    .map(
+      (name) => `
+        <li class="clients-marquee-item">
+          <span class="clients-marquee-label">${escapeHtml(name.toUpperCase())}</span>
+        </li>
+      `
+    )
+    .join('');
+
+  return `
+    <section class="clients-section" id="our-clients" aria-labelledby="ourClientsTitle">
+      <div class="container clients-layout">
+        <div class="section-heading section-heading-centered clients-heading">
+          <span class="hero-eyebrow">Trusted businesses</span>
+          <h2 id="ourClientsTitle">Our Clients</h2>
+          <p class="subsystems-copy clients-copy">
+            A growing network of businesses trust Expult Global to design elegant digital systems that support visibility, automation, and growth.
+          </p>
+        </div>
+
+        <div class="clients-marquee-panel">
+          <div class="clients-marquee-viewport" aria-label="Selected Expult Global clients">
+            <div class="clients-marquee-track">
+              <ul class="clients-marquee-group">
+                ${clientItems}
+              </ul>
+
+              <ul class="clients-marquee-group" aria-hidden="true">
+                ${clientItems}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
+};
+
 const initializeRevenueSubsystemSection = () => {
   const heroScrollTrigger = document.querySelector('[data-scroll-target]');
   const heroScrollTargetSelector = heroScrollTrigger?.getAttribute('data-scroll-target');
@@ -1247,69 +1739,220 @@ const initializeRevenueSubsystemSection = () => {
   });
 };
 
-const initializeContactForm = () => {
-  const contactForm = document.querySelector('#contactForm');
-  const contactFeedback = document.querySelector('#contactFeedback');
-  const contactSubmitButton = document.querySelector('#contactSubmitButton');
-  const contactCloseButton = document.querySelector('#contactCloseButton');
-  const teamTypeField = document.querySelector('#teamType');
-  const contactModal = document.querySelector('#contactModal');
-  const nameField = document.querySelector('#name');
-  const emailField = document.querySelector('#email');
-  const companyField = document.querySelector('#company');
-  const messageField = document.querySelector('#message');
-  let contactCloseTimer = null;
+const initializeAboutSection = () => {
+  const aboutSection = document.querySelector('#about-expult');
+  const panel = aboutSection?.querySelector('#aboutArchitecturePanel');
+  const gallery = aboutSection?.querySelector('.about-architecture-gallery');
+  const triggers = [...(aboutSection?.querySelectorAll('[data-about-index]') || [])];
+  const steps = [...(aboutSection?.querySelectorAll('[data-about-step]') || [])];
 
-  const applyTeamType = (label) => {
-    if (label?.includes('Service')) {
-      teamTypeField.value = 'Service Businesses';
-    } else if (label?.includes('Enterprise')) {
-      teamTypeField.value = 'Enterprise Teams';
-    } else if (label?.includes('Founder')) {
-      teamTypeField.value = 'Founders';
-    } else {
-      teamTypeField.value = 'General Inquiry';
-    }
+  if (!aboutSection || !panel || !gallery || !triggers.length || !steps.length) {
+    return;
+  }
+
+  let activeAboutIndex = -1;
+  let panelSwapTimer = null;
+  let panelRevealTimer = null;
+  const panelTransitionDuration = 180;
+
+  const renderActiveAboutPanel = (node) => {
+    panel.innerHTML = renderAboutPanelContent(node);
+    panel.classList.remove('is-fading-out');
+    panel.classList.add('is-fading-in');
+
+    window.clearTimeout(panelRevealTimer);
+    panelRevealTimer = window.setTimeout(() => {
+      panel.classList.remove('is-fading-in');
+    }, panelTransitionDuration + 60);
   };
 
-  document.querySelectorAll('[data-team-type]').forEach((trigger) => {
+  const syncAboutState = (safeIndex) => {
+    steps.forEach((step, stepIndex) => {
+      const isActive = stepIndex === safeIndex;
+      const distance = Math.abs(stepIndex - safeIndex);
+      const trigger = step.querySelector('[data-about-index]');
+      const direction = stepIndex < safeIndex ? 1 : stepIndex > safeIndex ? -1 : 0;
+      const scaleByDistance = [1.14, 0.88, 0.74, 0.62, 0.54, 0.48];
+      const opacityByDistance = [1, 0.82, 0.62, 0.46, 0.34, 0.26];
+      const distanceIndex = Math.min(distance, scaleByDistance.length - 1);
+
+      step.style.setProperty('--about-depth', String(distance));
+      step.style.setProperty('--about-stack-direction', String(direction));
+      step.style.setProperty('--about-node-scale', String(scaleByDistance[distanceIndex]));
+      step.style.setProperty('--about-node-opacity', String(opacityByDistance[distanceIndex]));
+      step.classList.toggle('active', isActive);
+      step.classList.toggle('inactive', !isActive);
+      step.classList.toggle('is-near', distance === 1);
+      step.classList.toggle('is-mid', distance === 2);
+      step.classList.toggle('is-far', distance >= 3);
+      step.classList.toggle('is-before', stepIndex < safeIndex);
+      step.classList.toggle('is-after', stepIndex > safeIndex);
+      trigger?.setAttribute('aria-pressed', String(isActive));
+    });
+  };
+
+  const centerActiveAboutNode = (safeIndex, behavior) => {
+    const activeStep = steps[safeIndex];
+
+    if (!activeStep) {
+      return;
+    }
+
+    const targetTop = activeStep.offsetTop - (gallery.clientHeight - activeStep.offsetHeight) / 2;
+
+    gallery.scrollTo({
+      top: Math.max(targetTop, 0),
+      behavior,
+    });
+  };
+
+  const setActiveAboutNode = (index, { immediate = false } = {}) => {
+    const safeIndex = aboutArchitectureNodes[index] ? index : 0;
+
+    if (safeIndex === activeAboutIndex && !immediate) {
+      return;
+    }
+
+    const activeNode = aboutArchitectureNodes[safeIndex];
+    activeAboutIndex = safeIndex;
+
+    syncAboutState(safeIndex);
+    centerActiveAboutNode(safeIndex, immediate ? 'auto' : 'smooth');
+    window.clearTimeout(panelSwapTimer);
+    window.clearTimeout(panelRevealTimer);
+
+    if (immediate) {
+      renderActiveAboutPanel(activeNode);
+      return;
+    }
+
+    panel.classList.remove('is-fading-in');
+    panel.classList.add('is-fading-out');
+
+    panelSwapTimer = window.setTimeout(() => {
+      renderActiveAboutPanel(activeNode);
+    }, panelTransitionDuration);
+  };
+
+  triggers.forEach((trigger) => {
+    const aboutIndex = Number(trigger.getAttribute('data-about-index'));
+
     trigger.addEventListener('click', () => {
-      applyTeamType(trigger.getAttribute('data-team-type'));
+      setActiveAboutNode(aboutIndex);
     });
   });
 
-  contactModal.addEventListener('show.bs.modal', (event) => {
-    if (contactCloseTimer) {
-      window.clearTimeout(contactCloseTimer);
-      contactCloseTimer = null;
+  setActiveAboutNode(0, { immediate: true });
+};
+
+const initializeContactForm = () => {
+  const contactSection = document.querySelector('#contact-us');
+  const contactModal = document.querySelector('#contactModal');
+  const contactForm = document.querySelector('#contactForm');
+  const contactFeedback = document.querySelector('#contactFeedback');
+  const contactSubmitButton = document.querySelector('#contactSubmitButton');
+  const teamTypeField = document.querySelector('#teamType');
+  const nameField = document.querySelector('#contactName');
+  const emailField = document.querySelector('#contactEmail');
+  const companyField = document.querySelector('#contactCompany');
+  const messageField = document.querySelector('#contactMessage');
+  const activationButtons = [...document.querySelectorAll('[data-contact-target="form"]')];
+  const reopenTrigger = document.querySelector('#contactModalReopenTrigger');
+  let shouldFocusFieldOnOpen = false;
+
+  if (
+    !contactSection ||
+    !contactModal ||
+    !contactForm ||
+    !contactFeedback ||
+    !contactSubmitButton ||
+    !teamTypeField ||
+    !nameField ||
+    !emailField ||
+    !companyField ||
+    !messageField ||
+    !reopenTrigger
+  ) {
+    return;
+  }
+
+  const hydratePendingContactPrefill = () => {
+    if (!pendingContactPrefill) {
+      return;
     }
 
-    const trigger = event.relatedTarget;
-    const teamTypeLabel = trigger?.getAttribute('data-team-type');
+    nameField.value = pendingContactPrefill.name || '';
+    emailField.value = pendingContactPrefill.email || '';
+    companyField.value = pendingContactPrefill.company || '';
+    teamTypeField.value = pendingContactPrefill.teamType || 'General Inquiry';
+    messageField.value = pendingContactPrefill.message || '';
+    pendingContactPrefill = null;
+  };
 
-    contactFeedback.innerHTML = '';
-
-    if (teamTypeLabel) {
-      applyTeamType(teamTypeLabel);
-    }
-
-    if (pendingContactPrefill) {
-      nameField.value = pendingContactPrefill.name || '';
-      emailField.value = pendingContactPrefill.email || '';
-      companyField.value = pendingContactPrefill.company || '';
-      teamTypeField.value = pendingContactPrefill.teamType || 'General Inquiry';
-      messageField.value = pendingContactPrefill.message || '';
-      pendingContactPrefill = null;
-    }
+  const createContactDraft = (teamTypeLabel = '') => ({
+    name: nameField.value.trim(),
+    email: emailField.value.trim(),
+    company: companyField.value.trim(),
+    teamType: teamTypeLabel ? getTeamTypeFromLabel(teamTypeLabel) : teamTypeField.value,
+    message: messageField.value.trim()
   });
 
-  contactModal.addEventListener('hidden.bs.modal', () => {
-    if (contactCloseTimer) {
-      window.clearTimeout(contactCloseTimer);
-      contactCloseTimer = null;
+  const focusPreferredField = () => {
+    const preferredField = nameField.value ? messageField : nameField;
+
+    window.setTimeout(() => {
+      preferredField?.focus();
+    }, 60);
+  };
+
+  const openContactModal = ({ focusField = false, shouldScroll = false } = {}) => {
+    shouldFocusFieldOnOpen = focusField;
+
+    const triggerOpen = () => {
+      if (contactModal.classList.contains('show')) {
+        hydratePendingContactPrefill();
+
+        if (shouldFocusFieldOnOpen) {
+          shouldFocusFieldOnOpen = false;
+          focusPreferredField();
+        }
+
+        return;
+      }
+
+      reopenTrigger.click();
+    };
+
+    if (shouldScroll) {
+      contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      window.setTimeout(triggerOpen, 220);
+      return;
     }
 
-    contactFeedback.innerHTML = '';
+    triggerOpen();
+  };
+
+  activationButtons.forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const teamTypeLabel = trigger.getAttribute('data-team-type');
+
+      contactFeedback.innerHTML = '';
+
+      pendingContactPrefill = createContactDraft(teamTypeLabel || '');
+      openContactModal({
+        focusField: true,
+        shouldScroll: !trigger.closest('#contact-us')
+      });
+    });
+  });
+
+  contactModal.addEventListener('shown.bs.modal', () => {
+    hydratePendingContactPrefill();
+
+    if (shouldFocusFieldOnOpen) {
+      shouldFocusFieldOnOpen = false;
+      focusPreferredField();
+    }
   });
 
   contactForm.addEventListener('submit', async (event) => {
@@ -1336,19 +1979,13 @@ const initializeContactForm = () => {
         body: JSON.stringify(payload)
       });
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Unable to send your request right now.');
-      }
+      const data = await parseApiResponse(response, 'Unable to send your request right now.');
 
       contactFeedback.innerHTML = `<div class="alert alert-success mb-0">${data.message}</div>`;
       contactForm.reset();
       contactForm.classList.remove('was-validated');
-
-      contactCloseTimer = window.setTimeout(() => {
-        contactCloseButton?.click();
-      }, 1200);
+      teamTypeField.value = '';
+      pendingContactPrefill = null;
     } catch (error) {
       contactFeedback.innerHTML = `
         <div class="alert alert-warning mb-0">
@@ -1360,6 +1997,407 @@ const initializeContactForm = () => {
       contactSubmitButton.textContent = 'Send Request';
     }
   });
+};
+
+const initializeChatbotPanel = () => {
+  const contactSection = document.querySelector('#contact-us');
+  const chatPanel = document.querySelector('#contactChatPanel');
+  const chatIntroPanel = document.querySelector('#chatIntroPanel');
+  const chatApp = document.querySelector('#contactChatApp');
+  const chatServiceChips = document.querySelector('#chatbotServiceChips');
+  const chatServiceStripPrev = document.querySelector('#chatServiceStripPrev');
+  const chatServiceStripNext = document.querySelector('#chatServiceStripNext');
+  const chatMessageList = document.querySelector('#chatMessageList');
+  const chatFeedback = document.querySelector('#chatFeedback');
+  const chatComposer = document.querySelector('#chatComposer');
+  const chatMessageInput = document.querySelector('#chatMessageInput');
+  const chatSendButton = document.querySelector('#chatSendButton');
+  const chatRestartButton = document.querySelector('#chatRestartButton');
+  const chatCloseButton = document.querySelector('#chatCloseButton');
+  const chatLeadName = document.querySelector('#chatLeadName');
+  const chatLeadEmail = document.querySelector('#chatLeadEmail');
+  const chatLeadCompany = document.querySelector('#chatLeadCompany');
+  const chatLeadServiceInterest = document.querySelector('#chatLeadServiceInterest');
+  const chatLeadFollowup = document.querySelector('#chatLeadFollowup');
+  const activationButtons = [...document.querySelectorAll('[data-contact-target="chat"]')];
+  const primaryChatToggle = chatPanel?.querySelector('[aria-controls="contactChatApp"]');
+  const hasLeadFields = Boolean(chatLeadName && chatLeadEmail && chatLeadCompany && chatLeadServiceInterest && chatLeadFollowup);
+
+  if (
+    !contactSection ||
+    !chatPanel ||
+    !chatIntroPanel ||
+    !chatApp ||
+    !chatServiceChips ||
+    !chatServiceStripPrev ||
+    !chatServiceStripNext ||
+    !chatMessageList ||
+    !chatFeedback ||
+    !chatComposer ||
+    !chatMessageInput ||
+    !chatSendButton ||
+    !chatCloseButton
+  ) {
+    return;
+  }
+
+  const renderMessageBody = (content = '') => escapeHtml(content).replace(/\n/g, '<br />');
+
+  const renderMatchedServiceChips = (matchedServices = []) =>
+    matchedServices
+      .map((service) => {
+        const label = service?.title || service?.name || service?.label || service?.slug || 'Service';
+        return `<span class="contact-chat-meta-pill">${escapeHtml(label)}</span>`;
+      })
+      .join('');
+
+  const renderLeadCaptureStatus = (leadCapture) => {
+    if (!leadCapture?.captured) {
+      return '';
+    }
+
+    return `<span class="contact-chat-meta-pill">${leadCapture.requested ? 'Follow-up requested' : 'Lead details saved'}</span>`;
+  };
+
+  const renderServicePromptChips = () => {
+    const serviceItems = (chatbotState.services.length ? chatbotState.services : services).slice(0, 6);
+
+    return serviceItems
+      .map((service) => {
+        const label = typeof service === 'string' ? service : service?.title || service?.name || service?.label || service?.slug || 'Service';
+        const prompt = `Tell me about ${label}.`;
+
+        return `
+          <button class="contact-chat-chip contact-chat-chip-service" type="button" data-chat-prompt="${escapeHtml(prompt)}">
+            ${escapeHtml(label)}
+          </button>
+        `;
+      })
+      .join('');
+  };
+
+  const syncLeadInputs = () => {
+    if (!hasLeadFields) {
+      return;
+    }
+
+    chatLeadName.value = chatbotState.lead.name;
+    chatLeadEmail.value = chatbotState.lead.email;
+    chatLeadCompany.value = chatbotState.lead.company;
+    chatLeadServiceInterest.value = chatbotState.lead.serviceInterest;
+    chatLeadFollowup.checked = chatbotState.lead.requestHumanFollowUp;
+  };
+
+  const syncLeadState = () => {
+    if (!hasLeadFields) {
+      return;
+    }
+
+    chatbotState = {
+      ...chatbotState,
+      lead: {
+        name: chatLeadName.value.trim(),
+        email: chatLeadEmail.value.trim(),
+        company: chatLeadCompany.value.trim(),
+        serviceInterest: chatLeadServiceInterest.value,
+        requestHumanFollowUp: chatLeadFollowup.checked
+      }
+    };
+  };
+
+  const getLeadPayload = () => {
+    if (!hasLeadFields) {
+      return {};
+    }
+
+    syncLeadState();
+
+    return Object.fromEntries(
+      Object.entries(chatbotState.lead).filter(([, value]) => {
+        if (typeof value === 'boolean') {
+          return value;
+        }
+
+        return Boolean(value);
+      })
+    );
+  };
+
+  const renderTypingIndicator = () => `
+    <article class="contact-chat-message is-assistant is-typing" aria-live="polite" aria-label="Expult AI bot is typing">
+      <div class="contact-chat-bubble contact-chat-bubble-typing">
+        <span class="contact-chat-typing-dot"></span>
+        <span class="contact-chat-typing-dot"></span>
+        <span class="contact-chat-typing-dot"></span>
+      </div>
+    </article>
+  `;
+
+  const updateServiceStripControls = () => {
+    const maxScrollLeft = Math.max(chatServiceChips.scrollWidth - chatServiceChips.clientWidth, 0);
+    const hasOverflow = maxScrollLeft > 6;
+    const canScrollLeft = chatServiceChips.scrollLeft > 6;
+    const canScrollRight = chatServiceChips.scrollLeft < maxScrollLeft - 6;
+
+    chatServiceStripPrev.hidden = !hasOverflow || !canScrollLeft;
+    chatServiceStripNext.hidden = !hasOverflow || !canScrollRight;
+    chatServiceStripPrev.disabled = !canScrollLeft;
+    chatServiceStripNext.disabled = !canScrollRight;
+  };
+
+  const scrollServiceStrip = (direction) => {
+    const scrollAmount = Math.max(Math.round(chatServiceChips.clientWidth * 0.72), 180);
+
+    chatServiceChips.scrollBy({
+      left: direction * scrollAmount,
+      behavior: 'smooth'
+    });
+  };
+
+  const renderChatbotPanel = () => {
+    chatPanel.classList.toggle('is-active', chatbotState.isActive);
+    chatIntroPanel.setAttribute('aria-hidden', String(chatbotState.isActive));
+    chatApp.setAttribute('aria-hidden', String(!chatbotState.isActive));
+    chatIntroPanel.toggleAttribute('inert', chatbotState.isActive);
+    chatApp.toggleAttribute('inert', !chatbotState.isActive);
+    primaryChatToggle?.setAttribute('aria-expanded', String(chatbotState.isActive));
+
+    chatServiceChips.innerHTML = renderServicePromptChips();
+    chatFeedback.innerHTML = chatbotState.errorMessage
+      ? `<div class="alert alert-warning mb-0">${escapeHtml(chatbotState.errorMessage)}</div>`
+      : '';
+
+    const messageMarkup = chatbotState.messages
+      .map((message) => {
+        const isAssistant = message.role === 'assistant';
+        const metaMarkup = isAssistant
+          ? `${renderMatchedServiceChips(message.matchedServices)}${renderLeadCaptureStatus(message.leadCapture)}`
+          : '';
+
+        return `
+          <article class="contact-chat-message ${isAssistant ? 'is-assistant' : 'is-user'}">
+            <div class="contact-chat-bubble">
+              <p>${renderMessageBody(message.content)}</p>
+              ${message.followUpQuestion ? `<p class="contact-chat-followup">${renderMessageBody(message.followUpQuestion)}</p>` : ''}
+              ${metaMarkup ? `<div class="contact-chat-meta-row">${metaMarkup}</div>` : ''}
+            </div>
+          </article>
+        `;
+      })
+      .join('');
+
+    chatMessageList.innerHTML = `${messageMarkup}${chatbotState.isSending ? renderTypingIndicator() : ''}`;
+
+    syncLeadInputs();
+    chatMessageInput.disabled = !chatbotState.isActive;
+    chatSendButton.disabled = !chatbotState.isActive || chatbotState.isSending;
+    chatSendButton.textContent = 'Send';
+
+    window.requestAnimationFrame(() => {
+      updateServiceStripControls();
+      chatMessageList.scrollTop = chatMessageList.scrollHeight;
+    });
+  };
+
+  const hydrateServiceInterestOptions = (serviceItems) => {
+    if (!hasLeadFields) {
+      return;
+    }
+
+    const nextOptions = serviceItems.length ? serviceItems : services;
+    const previousValue = chatLeadServiceInterest.value;
+
+    chatLeadServiceInterest.innerHTML = `
+      <option value="">Select a service</option>
+      ${renderServiceInterestOptions(nextOptions)}
+    `;
+
+    if (previousValue) {
+      chatLeadServiceInterest.value = previousValue;
+    }
+  };
+
+  const loadChatbotServices = async () => {
+    if (chatbotState.isLoadingServices || chatbotState.services.length) {
+      return;
+    }
+
+    chatbotState = {
+      ...chatbotState,
+      isLoadingServices: true
+    };
+
+    try {
+      const response = await fetch(`${apiBaseUrl}/api/chatbot/services`);
+      const data = await parseApiResponse(response, 'We could not load the current Expult service list.');
+
+      chatbotState = {
+        ...chatbotState,
+        services: Array.isArray(data.services) ? data.services : [],
+        isLoadingServices: false
+      };
+
+      hydrateServiceInterestOptions(chatbotState.services);
+      renderChatbotPanel();
+    } catch (_error) {
+      chatbotState = {
+        ...chatbotState,
+        isLoadingServices: false
+      };
+      hydrateServiceInterestOptions([]);
+      renderChatbotPanel();
+    }
+  };
+
+  const activateChat = ({ focusInput = true } = {}) => {
+    contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    chatbotState = {
+      ...chatbotState,
+      isActive: true,
+      errorMessage: ''
+    };
+    renderChatbotPanel();
+    loadChatbotServices().catch(() => {});
+
+    if (focusInput) {
+      window.setTimeout(() => {
+        chatMessageInput.focus();
+      }, 120);
+    }
+  };
+
+  const sendChatMessage = async (message) => {
+    const trimmedMessage = message.trim();
+
+    if (!trimmedMessage || chatbotState.isSending) {
+      return;
+    }
+
+    chatbotState = {
+      ...chatbotState,
+      isSending: true,
+      errorMessage: '',
+      messages: [...chatbotState.messages, { role: 'user', content: trimmedMessage }]
+    };
+
+    renderChatbotPanel();
+    chatMessageInput.value = '';
+
+    try {
+      const response = await fetch(`${apiBaseUrl}/api/chatbot/messages`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message: trimmedMessage,
+          lead: getLeadPayload(),
+          conversation: chatbotState.messages.map(({ role, content }) => ({ role, content })).slice(-10)
+        })
+      });
+
+      const data = await parseApiResponse(response, 'We could not reach the support assistant right now.');
+
+      chatbotState = {
+        ...chatbotState,
+        isSending: false,
+        messages: [
+          ...chatbotState.messages,
+          {
+            role: 'assistant',
+            content: data.reply || 'I can help you with approved Expult service information.',
+            matchedServices: Array.isArray(data.matchedServices) ? data.matchedServices : [],
+            followUpQuestion: data.followUpQuestion || '',
+            leadCapture: data.leadCapture || null
+          }
+        ]
+      };
+    } catch (error) {
+      chatbotState = {
+        ...chatbotState,
+        isSending: false,
+        errorMessage: error.message || 'We could not reach the support assistant right now.'
+      };
+    }
+
+    renderChatbotPanel();
+  };
+
+  activationButtons.forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      activateChat();
+    });
+  });
+
+  if (hasLeadFields) {
+    [chatLeadName, chatLeadEmail, chatLeadCompany].forEach((field) => {
+      field.addEventListener('input', syncLeadState);
+    });
+    chatLeadServiceInterest.addEventListener('change', syncLeadState);
+    chatLeadFollowup.addEventListener('change', syncLeadState);
+  }
+
+  chatServiceChips.addEventListener('scroll', updateServiceStripControls, { passive: true });
+  chatServiceStripPrev.addEventListener('click', () => {
+    scrollServiceStrip(-1);
+  });
+  chatServiceStripNext.addEventListener('click', () => {
+    scrollServiceStrip(1);
+  });
+  window.addEventListener('resize', () => {
+    window.requestAnimationFrame(updateServiceStripControls);
+  });
+
+  chatPanel.addEventListener('click', (event) => {
+    const promptButton = event.target.closest('[data-chat-prompt]');
+
+    if (!promptButton) {
+      return;
+    }
+
+    const prompt = promptButton.getAttribute('data-chat-prompt') || '';
+    if (!chatbotState.isActive) {
+      activateChat({ focusInput: false });
+    }
+    sendChatMessage(prompt).catch(() => {});
+  });
+
+  chatComposer.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!chatbotState.isActive) {
+      activateChat({ focusInput: false });
+    }
+    sendChatMessage(chatMessageInput.value).catch(() => {});
+  });
+
+  chatRestartButton?.addEventListener('click', () => {
+    chatbotState = {
+      ...createInitialChatState(),
+      isActive: true,
+      services: chatbotState.services
+    };
+    hydrateServiceInterestOptions(chatbotState.services);
+    renderChatbotPanel();
+    window.setTimeout(() => {
+      chatMessageInput.focus();
+    }, 80);
+  });
+
+  chatCloseButton.addEventListener('click', () => {
+    chatbotState = {
+      ...chatbotState,
+      isActive: false,
+      errorMessage: ''
+    };
+    renderChatbotPanel();
+    window.setTimeout(() => {
+      primaryChatToggle?.focus();
+    }, 180);
+  });
+
+  hydrateServiceInterestOptions([]);
+  renderChatbotPanel();
+  loadChatbotServices().catch(() => {});
 };
 
 const initializeExperienceModal = () => {
@@ -1963,6 +3001,8 @@ const initializeExperienceModal = () => {
 };
 
 renderApp();
+initializeAboutSection();
 initializeRevenueSubsystemSection();
 initializeContactForm();
+initializeChatbotPanel();
 initializeExperienceModal();
