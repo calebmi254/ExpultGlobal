@@ -1137,7 +1137,7 @@ const renderApp = () => {
             <div class="col-lg-7 col-xl-6">
               <div class="hero-copy">
                 <span class="hero-eyebrow">Revenue Automation Systems</span>
-                <h1>Build Revenue Systems That Capture, Qualify, and Convert</h1>
+                <h1>Transforming Digital presence into automated revenue Systems</h1>
                 <p class="hero-lead">
                   Expult Global helps businesses capture customers, automate operations, understand demand, and build a complete revenue automation ecosystem.
                 </p>
