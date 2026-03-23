@@ -1138,6 +1138,13 @@ const renderApp = () => {
               <div class="hero-copy">
                 <span class="hero-eyebrow">Revenue Automation Systems</span>
                 <h1>TRANSFORMING DIGITAL PRESENCE INTO AUTOMATED REVENUE SYSTEMS</h1>
+                <div class="hero-typing-container">
+                  <span class="hero-typing-label">How We Do it:</span>
+                  <div class="hero-typing-wrapper">
+                    <span id="heroTypingSub" class="hero-typing-sub"></span>
+                    <span class="hero-typing-cursor"></span>
+                  </div>
+                </div>
                 <p class="hero-lead">
                   Expult Global helps businesses capture customers, automate operations, understand demand, and build a complete revenue automation ecosystem.
                 </p>
@@ -3002,9 +3009,55 @@ const initializeExperienceModal = () => {
   });
 };
 
+const initializeTypingAnimation = () => {
+  const target = document.querySelector('#heroTypingSub');
+  if (!target) return;
+
+  const phrases = [
+    "By helping you stop losing traffic, instead convert them to leads.",
+    "By helping you create AI powered customer support Systems.",
+    "By automating your business processes to help your business financially grow.",
+    "By helping you build custom software solutions."
+  ];
+
+  let currentPhraseIndex = 0;
+
+  const animate = async (text, currentText) => {
+    let i = 0;
+    while (i < text.length && i < currentText.length && text[i] === currentText[i]) {
+      i++;
+    }
+
+    while (target.textContent.length > i) {
+      target.textContent = target.textContent.slice(0, -1);
+      await new Promise((r) => setTimeout(r, 45));
+    }
+
+    await new Promise((r) => setTimeout(r, 600));
+
+    while (i < text.length) {
+      target.textContent += text[i];
+      i++;
+      await new Promise((r) => setTimeout(r, 85));
+    }
+  };
+
+  const run = async () => {
+    while (true) {
+      const nextPhrase = phrases[currentPhraseIndex];
+      await animate(nextPhrase, target.textContent);
+      await new Promise((r) => setTimeout(r, 3500));
+      currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+    }
+  };
+
+  run();
+};
+
 renderApp();
 initializeAboutSection();
 initializeRevenueSubsystemSection();
 initializeContactForm();
 initializeChatbotPanel();
 initializeExperienceModal();
+initializeTypingAnimation();

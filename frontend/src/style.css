@@ -128,7 +128,7 @@ button {
 .hero-section {
   position: relative;
   min-height: calc(100vh - 58px);
-  padding: 5.5rem 0 4.5rem;
+  padding: 2.75rem 0 4.5rem;
   background-image: var(--hero-image);
   background-position: center right;
   background-repeat: no-repeat;
@@ -162,7 +162,7 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.625rem;
   padding: 0.45rem 0.8rem;
   border: 1px solid rgba(242, 165, 138, 0.18);
   border-radius: 999px;
@@ -176,10 +176,59 @@ button {
 
 .hero-copy h1 {
   font-family: Manrope, Inter, sans-serif;
-  font-size: clamp(1.375rem, 2.5vw, 2.4rem);
+  font-size: clamp(1.7875rem, 3.25vw, 3.12rem);
   line-height: 1.05;
   letter-spacing: 0.01em;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-typing-container {
+  min-height: 4.8rem;
+  margin-bottom: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.hero-typing-label {
+  color: rgba(244, 241, 238, 0.6);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  margin-bottom: 0.25rem;
+}
+
+.hero-typing-wrapper {
+  display: block;
+  min-height: 1.8rem;
+  width: 100%;
+}
+
+.hero-typing-sub {
+  display: inline;
+  color: #ff6a3d;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.hero-typing-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  background-color: #ff6a3d;
+  margin-left: 4px;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .hero-lead,
